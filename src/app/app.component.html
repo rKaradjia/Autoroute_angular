@@ -15,6 +15,41 @@
   </li>
   <li>
     <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
+
   </li>
 </ul>
+
+
+<h3>Identifiant</h3>
+<input type="text" class="form-control" [(ngModel)]="appareilName">
+
+<h3>Mot de passe</h3>
+<input type="text" class="form-control" [(ngModel)]="appareilName">
+
+
+<h3>Mes abonnements</h3>
+<ul class="list-group">
+
+<app-abonnement></app-abonnement>
+<app-abonnement></app-abonnement>
+
+
+
+
+</ul>
+
+
+<button class="btn btn-success" 
+
+    [disabled]="!isAuth" 
+
+    (click)="onAllumer()">Tout allumer</button>
+
+
+
+
+
+
+
+
 
