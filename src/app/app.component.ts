@@ -30,4 +30,12 @@ export class AppComponent {
     console.log('On allume tout !');
 
 }
+
+  onSession() {
+
+  console.log('code à définit pour l ouverture de la session');
+
+}
+
+
 }
