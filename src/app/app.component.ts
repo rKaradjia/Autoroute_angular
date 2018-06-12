@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +9,10 @@ export class AppComponent {
   title = 'app';
   isAuth = false;
 
+
+  //appareilStatus: string = 'éteint';
+ /* @Input() abonnementName: string;
+  @Input() abonnementStatus: string;*/
 
 
   constructor() {
@@ -37,5 +41,23 @@ export class AppComponent {
 
 }
 
+/*getColor() {
+
+  if(this.appareilStatus === 'allumé') {
+
+    return 'green';
+
+  } else if(this.appareilStatus === 'éteint') {
+
+    return 'red';
+
+  }*/
+  
+}
+/*getStatus() {
+
+  return this.appareilStatus;
 
 }
+
+}*/

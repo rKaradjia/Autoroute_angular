@@ -1,6 +1,14 @@
 <li class="list-group-item">
 
-  <h4>Abonnement 1 : ce qui est inclût : {{getliberte()}} </h4>
+<!--can't bind abonnementName and abonnementStatus  ts file-->
+
+  <h4 *ngFor="let abonnement of abonnements"
+  [abonnementName]="abonnement.name"    
+  [abonnementStatus]="abonnement.status"></h4>
+
+
+
+  <!--<h4>Abonnement 1 : ce qui est inclût : {{getliberte()}} </h4>
   <button class="btn btn-success" 
 
     [disabled]="!isAuth" 
@@ -25,7 +33,7 @@
 
     [disabled]="!isAuth" 
 
-    (click)="onAllumer()">Tout allumer</button>
+    (click)="onAllumer()">Tout allumer</button>-->
 
 </li>
 

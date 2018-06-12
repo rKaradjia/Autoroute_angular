@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-abonnement',
@@ -7,11 +7,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AbonnementComponent implements OnInit {
 
-  liberte: string = 'vous payez quand vous utilisé';
+   liberte: string = 'vous payez quand vous utilisé';
 
    premium: string = 'tarif au mois';
 
    premiumplus: string = 'premium plus';
+
+   //@Input() estdispo: boolean;
+
+   @Input() abonnementName: string;
+   @Input() abonnementStatus: string;
+
+
+   abonnements = [
+
+    {
+
+      name: 'premium',
+
+      status: 'disponible'
+
+    },
+
+    {
+
+      name: 'liberte',
+
+      status: 'indisponible'
+
+    },
+
+    {
+
+      name: 'premiumplus',
+
+      status: 'disponible'
+
+    }
+
+  ];
 
 
 
@@ -49,4 +83,19 @@ export class AbonnementComponent implements OnInit {
     console.log('On allume tout !');
 
 }
+
+
+getColor() {
+
+  if(this.abonnementStatus === 'disponible') {
+
+    return 'green';
+
+  } else if(this.abonnementStatus === 'indisponible') {
+
+    return 'red';
+
+  }
+}
+
 }
