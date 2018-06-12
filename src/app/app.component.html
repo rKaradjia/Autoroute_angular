@@ -18,7 +18,14 @@
 
   </li>
 </ul>
+<div style="width:20px;height:20px;background-color:green;" 
 
+       *ngIf="isAuth"></div>
+
+
+
+       <p style="width:20px;height:20px;background-color:red;" 
+       *ngIf="!isAuth">on affichera un message si le login est faux</p>     
 
 <h3>Identifiant</h3>
 <input type="text" class="form-control" [(ngModel)]="appareilName">
