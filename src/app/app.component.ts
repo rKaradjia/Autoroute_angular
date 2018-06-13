@@ -8,7 +8,22 @@ import { Component, Input } from '@angular/core';
 export class AppComponent {
   title = 'app';
   isAuth = false;
-  lastUpdate = new Date();
+  lastUpdate = new Promise((resolve, reject) => {
+
+    const date = new Date();
+
+    setTimeout(
+
+      () => {
+
+        resolve(date);
+
+      }, 2000
+
+    );
+
+  });
+
 
 //tests directives par attribut
   abonnementName = 'ma première directive par attribut';
