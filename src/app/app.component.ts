@@ -8,6 +8,7 @@ import { Component, Input } from '@angular/core';
 export class AppComponent {
   title = 'app';
   isAuth = false;
+  lastUpdate = new Date();
 
 //tests directives par attribut
   abonnementName = 'ma première directive par attribut';
