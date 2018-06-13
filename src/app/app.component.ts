@@ -9,12 +9,41 @@ export class AppComponent {
   title = 'app';
   isAuth = false;
 
+//tests directives par attribut
+  abonnementName = 'ma première directive par attribut';
+
 
   //appareilStatus: string = 'éteint';
  /* @Input() abonnementName: string;
   @Input() abonnementStatus: string;*/
 
+  abonnements = [
 
+    {
+
+      name: 'premium',
+
+      status: 'disponible'
+
+    },
+
+    {
+
+      name: 'liberte',
+
+      status: 'indisponible'
+
+    },
+
+    {
+
+      name: 'premiumplus',
+
+      status: 'disponible'
+
+    }
+
+  ];
   constructor() {
 
     setTimeout(

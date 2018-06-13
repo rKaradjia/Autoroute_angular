@@ -18,9 +18,9 @@ export class AbonnementComponent implements OnInit {
    @Input() abonnementName: string;// ATTENTION : les declarations de ce type ne peuvent
    @Input() abonnementStatus: string;//etre utilise que dans le component de 
                                      //hirarchie superieur : 
-                        //https://openclassrooms.com/courses/developpez-avec-angular/gerez-des-donnees-dynamiques
+              //https://openclassrooms.com/courses/developpez-avec-angular/gerez-des-donnees-dynamiques*/
 
-
+/*
    abonnements = [
 
     {
@@ -47,7 +47,7 @@ export class AbonnementComponent implements OnInit {
 
     }
 
-  ];
+  ];*/
 
 
 

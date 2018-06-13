@@ -39,8 +39,8 @@
 <br/>
 
 <h4>Les directives par attribut</h4>
-
-
+<!--
+<app-abonnement [abonnementName]=""
 <!--<h5[ngStyle]="{color: getColor()}"> Statut : {{ getStatus() }}>exemple</h5>-->
 
 <br/>
@@ -65,8 +65,12 @@
 <h3>Mes abonnements</h3>
 <ul class="list-group">
 
-<app-abonnement></app-abonnement>
-<app-abonnement></app-abonnement>
+<app-abonnement *ngFor="let abonnement of abonnements"
+
+[abonnementName]="abonnement.name"
+
+[abonnementStatus]="abonnement.status"></app-abonnement>
+
 
 
 
