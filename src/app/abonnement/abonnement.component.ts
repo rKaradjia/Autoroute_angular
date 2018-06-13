@@ -20,34 +20,7 @@ export class AbonnementComponent implements OnInit {
                                      //hirarchie superieur : 
               //https://openclassrooms.com/courses/developpez-avec-angular/gerez-des-donnees-dynamiques*/
 
-/*
-   abonnements = [
 
-    {
-
-      name: 'premium',
-
-      status: 'disponible'
-
-    },
-
-    {
-
-      name: 'liberte',
-
-      status: 'indisponible'
-
-    },
-
-    {
-
-      name: 'premiumplus',
-
-      status: 'disponible'
-
-    }
-
-  ];*/
 
 
 
