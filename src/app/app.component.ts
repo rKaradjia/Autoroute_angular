@@ -8,7 +8,8 @@ import { Component, Input } from '@angular/core';
 export class AppComponent {
   title = 'app';
   isAuth = false;
-  lastUpdate = new Promise((resolve, reject) => {
+  lastUpdate = new Date();
+  /*lastUpdate = new Promise((resolve, reject) => {
 
     const date = new Date();
 
@@ -22,7 +23,7 @@ export class AppComponent {
 
     );
 
-  });
+  });*/
 
 
 //tests directives par attribut
