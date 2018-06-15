@@ -29,17 +29,21 @@ function connectiondb(){
 
 
 
-function getTrajets(){
+//function getTrajets(){  //a supprimer ?
 
-    var con = connectiondb();
-    con.query("SELECT * FROM customers", function (err, result) {
+   // ?? a voir var con = connectiondb();
+    app.get('/trajets',(res,req)=>{ //definition de la route    localhost:3000/trajets
+    con.query("SELECT * FROM customers"/*sql requests*/, function (err, result) {
       if (err) throw err;
       console.log(result);return result;
+
+
+    }); 
     });
 
 
 
-}
+//}
 
 app.listen(3000,()=>console.log('server is running port 3000'))
 app.get('/',(res,req )=>{
