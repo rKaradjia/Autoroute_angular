@@ -20,7 +20,9 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
+    "body-parser": "^1.18.3",
     "core-js": "^2.5.4",
+    "express": "^4.16.3",
     "rxjs": "^6.0.0",
     "ws": "^5.2.0",
     "zone.js": "^0.8.26"
@@ -45,5 +47,17 @@
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
     "typescript": "~2.7.2"
-  }
+  },
+  "description": "readMe petit test pour verifier que tout va bien #VisualCode with git",
+  "main": "MYSQLserveurForAngular.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rKaradjia/Autoroute_angular.git"
+  },
+  "author": "Karadjia_Rehane",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rKaradjia/Autoroute_angular/issues"
+  },
+  "homepage": "https://github.com/rKaradjia/Autoroute_angular#readme"
 }
