@@ -19,15 +19,6 @@ app.use(bodyparser.json());
     database : "autorouteangular"
   });
 
- // module.exports.pool = con;
- // console.log('on teste la requete suivante' + getTrajets());
-  con.getConnection(function(err) {
-    if (err) console.log('Database connection failed' + JSON.stringify(err,undefined,2));
-    else
-    console.log("Connected!") ;return con;
-  });
-  
-
 
 
 app.listen(3000,()=>console.log('server is running port 3000'))
@@ -42,8 +33,10 @@ app.listen(3000,()=>console.log('server is running port 3000'))
           if (err) throw err;
           console.log(rows);return rows;
         });
-
+        //met fin à la connection 
+        connection.release();
     });
+   
   });
 
 
