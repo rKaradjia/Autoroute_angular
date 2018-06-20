@@ -1,4 +1,11 @@
+import { compteService } from './../../services/compteService'; //represente le contenu de la table dans la BDD 
+//+ requete HTTP
 import { Component, Input } from '@angular/core';
+
+//connexion au serveur nodeJS
+
+
+
 
 @Component({
   selector: 'app-root',
@@ -6,9 +13,23 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  
   title = 'app';
   isAuth = false;
   lastUpdate = new Date();
+  constructor() {
+
+    setTimeout(
+
+      () => {
+
+        this.isAuth = true;
+
+      }, 4000
+
+    );
+
+  }
   /*lastUpdate = new Promise((resolve, reject) => {
 
     const date = new Date();
@@ -24,6 +45,17 @@ export class AppComponent {
     );
 
   });*/
+
+
+
+    //realisation des requetes HTTP
+
+
+
+
+
+
+
 
 
 //tests directives par attribut
@@ -61,23 +93,12 @@ export class AppComponent {
     }
 
   ];
-  constructor() {
-
-    setTimeout(
-
-      () => {
-
-        this.isAuth = true;
-
-      }, 4000
-
-    );
-
-  }
+  
 
   onAllumer() {
 
     console.log('On allume tout !');
+ //   this.compteService.getAllCats();
 
 }
 
