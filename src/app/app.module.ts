@@ -9,6 +9,7 @@ import { MestrajetsComponent } from './mestrajets/mestrajets.component';
 import { MesreservationsComponent } from './mesreservations/mesreservations.component';
 import { ConnectRecordComponent } from './connect-record/connect-record.component';
 import { MoncompteComponent } from './moncompte/moncompte.component';
+import { compteService } from './../../services/compteService';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { MoncompteComponent } from './moncompte/moncompte.component';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [compteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,6 +9,10 @@ const mysql = require('mysql');
 
 //app.get('/', (req, res) => res.send('Hello World!'))*/
 app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({
+  extended: true
+}));
+
 
 
 
@@ -49,12 +53,37 @@ app.listen(3000,()=>console.log('server is running port 3000'))
       connection.query("SELECT * FROM trajets WHERE trajets.id = '"+res.params.id+"'", (err,rows)=> {
         if (err) throw err;
        console.log(rows);return rows;
+
+       /*      Resultat type : [ RowDataPacket { id: 1, nom: 'Karadjia' } ]*/
+
       });
       //met fin à la connection 
       connection.release();
   });
  
 });
+
+
+  app.post('/compte/creation', function (req, res) {  //parametres à definir ulterieurement ceci est un test
+   res.send('Got a POST request')
+
+   console.log('post ' + res.body);
+    con.getConnection(function (err, connection) {
+         // Use the connection
+         // INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);
+       connection.query("INSERT INTO compte (nom) VALUES("+res.body.nom+")", (err,rows)=> {  /*ou nom est l'identifiant 
+        d'un input */
+         if (err) throw err;
+         console.log(rows);return rows;
+
+                     /*      Resultat type : [ RowDataPacket { id: 1, nom: 'Karadjia' } ]*/
+
+       });
+                //met fin à la connection 
+      connection.release();
+   });
+
+  });
 
 
 //}
