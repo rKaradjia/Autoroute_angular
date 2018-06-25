@@ -1,19 +1,37 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
-<div *ngIf=>  <!--menu qui s'affiche si log in    condition à determiner-->
-  <ul id="navigation">
-    <li><a href="#" title="aller à la section 1">trajets</a></li>
-    <li><a href="#" title="aller à la section 2">restaurations</a></li>
-    <li><a href="#" title="aller à la section 3"></a></li>
-    <li><a href="#" title="aller à la section 4">item4</a></li>
-    <li><a href="#" title="aller à la section 5">mon compte</a></li>
-  </ul>
+<div >  <!--menu qui s'affiche si log in    condition à determiner-->
+
+  <mat-toolbar color="primary">  <!--using Angular Material : paquet supplementaire-->
+    <span>
+      <img src="assets/img/angular_whiteTransparent.svg" class="angular-logo">
+      Angular NavBar + Login Example #01
+    </span>
+    <span class="fill-remaining-space"></span>
+    <button mat-button>Menu Option 01</button>
+    <button mat-button>Menu Option 02</button>
+    <button mat-button routerLink="login">Login</button>
+    <button mat-button (click)="onLogout()">Logout</button>
+  </mat-toolbar>
 </div>
 
-<div *ngIf=>      <!--menu qui s'affiche si on s'est pas loggé   condition à determiner-->
+<div >      <!--menu qui s'affiche si on s'est pas loggé   condition à determiner-->
 
 
 </div>
+
+
+
+
+
+
+<app-connect-record *ngIf="corecord"></app-connect-record>
+
+
+
+
+
+
 
 
 

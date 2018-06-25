@@ -6,10 +6,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./connect-record.component.scss']
 })
 export class ConnectRecordComponent implements OnInit {
+  isco:boolean = true;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+
+  onConnecter(){
+    this.isco=true;
+
+  }
+
+
+  onEnregistrer(){
+    this.isco=false;
+
   }
 
 }

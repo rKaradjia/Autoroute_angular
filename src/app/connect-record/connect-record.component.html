@@ -1,3 +1,47 @@
+
+<div *ngIf=toco>
 <p>
-  connect-record works!
+  Connectez vous 
 </p>
+<form>
+<tr>Identifiant</tr>
+   <td><input type="text" id="identifiant"></td>
+
+  <tr>Mot de passe</tr> 
+<input type="password" id="pwd">
+
+
+</form>
+
+</div>
+
+
+  <div *ngIf=!toco>
+  <p>
+    Enregistrez-vous
+  </p>
+  
+<form>
+  <tr>renseignement1</tr>
+     <td><input type="text" id="identifiant"></td>
+  
+    <tr>renseignement2</tr> 
+  <input type="password" id="pwd">
+</form>
+  </div>
+
+  
+  
+
+
+
+<button class="btn btn-success" 
+
+
+    (click)="onConnecter()">se connecter</button>
+
+
+<button class="btn btn-success" 
+
+
+    (click)="onEnregistrer()">s'enregistrer</button>    

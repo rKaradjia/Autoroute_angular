@@ -10,6 +10,8 @@ import { MesreservationsComponent } from './mesreservations/mesreservations.comp
 import { ConnectRecordComponent } from './connect-record/connect-record.component';
 import { MoncompteComponent } from './moncompte/moncompte.component';
 import { compteService } from './../../services/compteService';
+//import { MaterialModule } from './material.module';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,17 @@ import { compteService } from './../../services/compteService';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    BrowserModule,
+    /*BrowserAnimationsModule,
+    LayoutModule,
+    RouterModule.forRoot(appRoutes),*/
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatCardModule
   ],
   providers: [compteService],
   bootstrap: [AppComponent]

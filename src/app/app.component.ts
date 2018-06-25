@@ -16,6 +16,7 @@ export class AppComponent {
   
   title = 'app';
   isAuth = false;
+  corecord = false;
   lastUpdate = new Date();
   constructor() {
 
@@ -54,7 +55,12 @@ export class AppComponent {
 
 
 
+    connectrecord(){
 
+         this.corecord=true;
+
+
+    }
 
 
 
