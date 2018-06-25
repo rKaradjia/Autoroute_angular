@@ -52,7 +52,7 @@ app.listen(3000,()=>console.log('server is running port 3000'))
      // "SELECT RAP_BILAN FROM RAPPORT_VISITE where RAP_NUM = '"+numRapport+"' "
       connection.query("SELECT * FROM trajets WHERE trajets.id = '"+res.params.id+"'", (err,rows)=> {
         if (err) throw err;
-       console.log(rows);res.send(rows);
+       console.log(rows);res.send(rows); //affiche dans le navigateur
 
        /*      Resultat type : [ RowDataPacket { id: 1, nom: 'Karadjia' } ]*/
 
@@ -70,11 +70,11 @@ app.listen(3000,()=>console.log('server is running port 3000'))
    console.log('post ' + res.body);
     con.getConnection(function (err, connection) {
          // Use the connection
-         // INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);
+         
        connection.query("INSERT INTO compte (nom) VALUES("+res.body.nom+")", (err,rows)=> {  /*ou nom est l'identifiant 
         d'un input */
          if (err) throw err;
-         console.log(rows);return rows;
+         console.log(rows);res.send(rows); //affiche dans le navigateur
 
                      /*      Resultat type : [ RowDataPacket { id: 1, nom: 'Karadjia' } ]*/
 
