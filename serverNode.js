@@ -30,12 +30,12 @@ app.listen(3000,()=>console.log('server is running port 3000'))
 //function getTrajets(){  //a supprimer ?
 
    
-    app.get('/trajets',(res,req)=>{ //definition de la route    localhost:3000/trajets
+    app.get('/trajets',(req,res)=>{ //definition de la route    localhost:3000/trajets
       con.getConnection(function (err, connection) {
         // Use the connection
         connection.query('SELECT * FROM trajets'/*sql requests*/, (err,rows)=> {
           if (err) throw err;
-          console.log(rows);return rows;
+          console.log(rows);res.send(rows);
         });
         //met fin à la connection 
         connection.release();
@@ -44,7 +44,7 @@ app.listen(3000,()=>console.log('server is running port 3000'))
   });
 
 
-  app.get('/trajets/:id',(res,req)=>{ //definition de la route    localhost:3000/trajets
+  app.get('/trajets/:id',(req,res)=>{ //definition de la route    localhost:3000/trajets
     console.log('id dans url ' + res.params.id);
 
     con.getConnection(function (err, connection) {
@@ -52,7 +52,7 @@ app.listen(3000,()=>console.log('server is running port 3000'))
      // "SELECT RAP_BILAN FROM RAPPORT_VISITE where RAP_NUM = '"+numRapport+"' "
       connection.query("SELECT * FROM trajets WHERE trajets.id = '"+res.params.id+"'", (err,rows)=> {
         if (err) throw err;
-       console.log(rows);return rows;
+       console.log(rows);res.send(rows);
 
        /*      Resultat type : [ RowDataPacket { id: 1, nom: 'Karadjia' } ]*/
 
