@@ -51,15 +51,21 @@ export class AppComponent {
 
     //realisation des requetes HTTP
 
+//MENU
 
 
-
-
+   /*LOGIN*/
     connectrecord(){
 
          this.corecord=true;
 
 
+    }
+
+    showAuthorFromParent = function(author){
+
+      alert(author);
+  
     }
 
 

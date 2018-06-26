@@ -1,17 +1,17 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
-<div >  <!--menu qui s'affiche si log in    condition à determiner-->
+<div >  <!--menu qui s'affiche si non log in    condition à determiner-->
 
   <mat-toolbar color="primary">  <!--using Angular Material : paquet supplementaire-->
     <span>
-      <img src="assets/img/angular_whiteTransparent.svg" class="angular-logo">
+      <img src="https://ngdocsdev.firebaseapp.com/resources/images/logos/angular2/angular.svg" height="100px" 
+       width="100px" class="angular-logo">
       Angular NavBar + Login Example #01
     </span>
     <span class="fill-remaining-space"></span>
-    <button mat-button>Menu Option 01</button>
-    <button mat-button>Menu Option 02</button>
-    <button mat-button routerLink="login">Login</button>
-    <button mat-button (click)="onLogout()">Logout</button>
+    <button mat-button>Accueil</button>
+    <button mat-button>Les abonnements</button>
+    <button mat-button (click)="connectrecord()">logIn</button>
   </mat-toolbar>
 </div>
 

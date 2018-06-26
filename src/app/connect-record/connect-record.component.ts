@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-connect-record',
@@ -6,16 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./connect-record.component.scss']
 })
 export class ConnectRecordComponent implements OnInit {
-  isco:boolean = true;
+  
+  @Input() isco: boolean;
+  @Output() authorClick: EventEmitter<String> = new EventEmitter<String>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+/*CONNECTION*/
+  onConnecter(event, author){
 
-  onConnecter(){
-    this.isco=true;
+    this.isco.emit(true); //emmiting the event.
 
   }
 
