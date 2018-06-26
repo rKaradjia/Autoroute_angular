@@ -19,7 +19,7 @@ export class ConnectRecordComponent implements OnInit {
 /*CONNECTION*/
   onConnecter(event, author){
 
-    this.isco.emit(true); //emmiting the event.
+  //  this.isco.emit(true); //emmiting the event.
 
   }
 
