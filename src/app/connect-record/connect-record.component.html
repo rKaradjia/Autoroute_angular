@@ -3,13 +3,14 @@
 <p>
   Connectez vous 
 </p>
-<form>
+<form #userForm="ngForm"   (ngSubmit)="onSave(userForm.value)">
 <tr>Identifiant</tr>
    <td><input type="text" id="identifiant"></td>
 
   <tr>Mot de passe</tr> 
 <input type="password" id="pwd">
-
+   
+<input type="submit" value="{{valbutton}}" /> 
 
 </form>
 

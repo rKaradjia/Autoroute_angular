@@ -35,4 +35,22 @@ export class ConnectRecordComponent implements OnInit {
 
   }
 
+
+
+
+
+
+
+  /*CLIENT HTTP*/
+  onSave = function(user) {    
+    user.mode= this.valbutton;  
+     this.newService.saveUser(user) /*a modifier*/ 
+     .subscribe(data =>  {  alert(data.data);  
+          
+       this.ngOnInit();    
+     }   
+     , error => this.errorMessage = error )  /*si erreur*/
+       
+   }   
+
 }
