@@ -22,7 +22,7 @@ export class ConnectRecordComponent implements OnInit {
     console.log("before the state was " + this.isco);
     this.connectClick.emit(this.isco/*si on veut passer des données*/);/*ici on met un event sur un bouton*/
     this.isco=true;
-    console.log("now the state is " + this.isco);
+    console.log("now the state is " + this.isco);  
 
   }
 
