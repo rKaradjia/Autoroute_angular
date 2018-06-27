@@ -45,12 +45,12 @@ app.listen(3000,()=>console.log('server is running port 3000'))
 
 
   app.get('/trajets/:id',(req,res)=>{ //definition de la route    localhost:3000/trajets
-    console.log('id dans url ' + res.params.id);
+    console.log('id dans url ' + req.params.id);
 
     con.getConnection(function (err, connection) {
       // Use the connection
      // "SELECT RAP_BILAN FROM RAPPORT_VISITE where RAP_NUM = '"+numRapport+"' "
-      connection.query("SELECT * FROM trajets WHERE trajets.id = '"+res.params.id+"'", (err,rows)=> {
+      connection.query("SELECT * FROM trajets WHERE trajets.id = '"+req.params.id+"'", (err,rows)=> {
         if (err) throw err;
        console.log(rows);res.send(rows); //affiche dans le navigateur
 
