@@ -9,7 +9,8 @@ import { Input, Output, EventEmitter } from '@angular/core';
 export class ConnectRecordComponent implements OnInit {
   
   @Input() isco: boolean;
-  @Output() authorClick: EventEmitter<String> = new EventEmitter<String>();
+  @Output() connectClick= new EventEmitter<Boolean>();//Ces deux variables permettent l'interaction 
+  @Output() recordClick = new EventEmitter<Boolean>();// entre les deux composants
 
   constructor() { }
 
@@ -17,15 +18,20 @@ export class ConnectRecordComponent implements OnInit {
   }
 
 /*CONNECTION*/
-  onConnecter(event, author){
-
-  //  this.isco.emit(true); //emmiting the event.
+  onConnecter(/*si on veut passer des données*/){
+    console.log("before the state was " + this.isco);
+    this.connectClick.emit(this.isco/*si on veut passer des données*/);/*ici on met un event sur un bouton*/
+    this.isco=true;
+    console.log("now the state is " + this.isco);
 
   }
 
 
   onEnregistrer(){
+    console.log("before the state was " + this.isco);
+    this.recordClick.emit(this.isco);
     this.isco=false;
+    console.log("now the state is " + this.isco);
 
   }
 

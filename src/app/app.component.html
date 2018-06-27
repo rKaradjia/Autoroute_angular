@@ -25,7 +25,8 @@
 
 
 
-<app-connect-record *ngIf="corecord"></app-connect-record>
+<app-connect-record *ngIf="corecord" (connectClick)="seConnecter()"
+(recordClick)="sEnregistrer()"></app-connect-record>
 
 
 

@@ -62,11 +62,15 @@ export class AppComponent {
 
     }
 
-    showAuthorFromParent = function(author){
+    seConnecter(event: Event) {
+      console.log(event); // You will see something here))
+   
+   }
 
-      alert(author);
-  
-    }
+   sEnregistrer(event: Event) {
+    console.log(event); // You will see something here))
+ 
+ }
 
 
 
