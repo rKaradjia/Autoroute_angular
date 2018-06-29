@@ -63,7 +63,7 @@ DROP TABLE IF EXISTS `aireAutoroute`;
 CREATE TABLE `aireAutoroute` (
   `id` int(11) NOT NULL,
   `libelle` varchar(30) NOT NULL,
-  `idAutoroute` int(11) DEFAULT NOT NULL, /*en principe et a se stade de la conception les grandes chaines ne possède que un seul id dans la table restaurants*/
+  `idAutoroute` int(11) NOT NULL, /*en principe et a se stade de la conception les grandes chaines ne possède que un seul id dans la table restaurants*/
   `jeuxEnfants` BOOLEAN,
   `brumisateur` BOOLEAN,
   `nomAutoroute` VARCHAR(5),
