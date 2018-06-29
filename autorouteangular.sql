@@ -6,6 +6,32 @@ USE `autorouteangularv2`;
 -- Table structure for table `autorouteangularv2`
 --
 
+
+
+/*table abonnement autoroute*/
+DROP TABLE IF EXISTS `abonnement`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `abonnement` (
+  `nom` varchar(10) NOT NULL,
+  `libelle` varchar(255) NOT NULL, /*entrée plat dessert   -  plat déssert - entrée plat            a définir*/
+  `prix` decimal(4,2),
+  PRIMARY KEY (`nom`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table ``
+--
+
+LOCK TABLES `abonnement` WRITE;
+
+UNLOCK TABLES;
+
+
+
+
+/*TABLE COMPTE*/
 DROP TABLE IF EXISTS `compte`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
@@ -18,7 +44,9 @@ CREATE TABLE `compte` (
   `voieNum` varchar(30) DEFAULT NULL,
   `nbReservation` int(20) DEFAULT NULL,
   `nbTrajets` int(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `nomabonnement` varchar(10),/*not null*/
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`nomabonnement`) REFERENCES `abonnement` (`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -37,8 +65,7 @@ DROP TABLE IF EXISTS `autoroute`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `autoroute` (
-  `nom` int(11) NOT NULL,
-  `libelle` varchar(255) NOT NULL,
+  `nom` varchar(5) NOT NULL,
   `traffic` varchar(1000) NOT NULL,
   PRIMARY KEY (`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -49,8 +76,8 @@ CREATE TABLE `autoroute` (
 --
 
 LOCK TABLES `autoroute` WRITE;
-/*!40000 ALTER TABLE `ACTIVITE_COMPL` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ACTIVITE_COMPL` ENABLE KEYS */;
+/*!40000 ALTER TABLE `autoroute` DISABLE KEYS */;
+/*!40000 ALTER TABLE `autoroute` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
@@ -63,12 +90,12 @@ DROP TABLE IF EXISTS `aireAutoroute`;
 CREATE TABLE `aireAutoroute` (
   `id` int(11) NOT NULL,
   `libelle` varchar(30) NOT NULL,
-  `idAutoroute` int(11) NOT NULL, /*en principe et a se stade de la conception les grandes chaines ne possède que un seul id dans la table restaurants*/
+  /*`idAutoroute` int(11) NOT NULL, /*en principe et a se stade de la conception les grandes chaines ne possède que un seul id dans la table restaurants*/
   `jeuxEnfants` BOOLEAN,
   `brumisateur` BOOLEAN,
-  `nomAutoroute` VARCHAR(5),
+  `nomAutoroute` VARCHAR(5) NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`idAutoroute`) REFERENCES `autoroute` (`nom`)
+  FOREIGN KEY (`nomAutoroute`) REFERENCES `autoroute` (`nom`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -87,7 +114,7 @@ DROP TABLE IF EXISTS `restaurants`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `restaurants` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,          /*un restaurant se situt sur une ou plusieurs aire*/
   `idAire` int(11) NOT NULL,
   `libelle` varchar(255) NOT NULL, /*entrée plat dessert   -  plat déssert - entrée plat            a définir*/
   `prix` decimal(4,2),
@@ -156,12 +183,7 @@ LOCK TABLES `reservation` WRITE;
 UNLOCK TABLES;*/
 
 
-
-
-
-
-
-/*table FORMULE*/
+/*table FORMULE des restuarants*/
 DROP TABLE IF EXISTS `formule`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
