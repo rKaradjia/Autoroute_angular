@@ -46,6 +46,8 @@ CREATE TABLE `compte` (
   `cp` int(5) DEFAULT NULL,
   `voie` varchar (50) DEFAULT NULL,
   `voieNum` varchar(30) DEFAULT NULL,
+  `login` varchar(50) DEFAULT NULL,
+  `mdp` varchar(50) DEFAULT NULL,
   `nomabonnement` varchar(10),/*not null*/
   PRIMARY KEY (`id`),
   FOREIGN KEY (`nomabonnement`) REFERENCES `abonnement` (`nom`)
@@ -57,10 +59,10 @@ CREATE TABLE `compte` (
 --
 /*INSERT INTO Persons (FirstName,LastName) VALUES ('Lars','Monsen');*/
 LOCK TABLES `compte` WRITE;
-INSERT INTO `compte` (nom,prenom,ville,cp,voie,voieNum,nomabonnement) VALUES ('Karadjia','Reynold','Champs-sur-marne',77420,'rue du chateau',5,'basic');
-INSERT INTO `compte` (nom,prenom,ville,cp,voie,voieNum,nomabonnement) VALUES ('Macedo','Goerges','Poissy',78360,'boulevard st germain',14,'premium');
-INSERT INTO `compte` (nom,prenom,ville,cp,voie,voieNum,nomabonnement) VALUES ('Shrize','Mathieu','Chessy',77260,'impasse de la marne',20,'VIP');
-INSERT INTO `compte` (nom,prenom,ville,cp,voie,voieNum,nomabonnement) VALUES ('Uskegaise','Varbetim','Trappes',78341,'rue saint cyr',82,'premium+');
+INSERT INTO `compte` (nom,prenom,ville,cp,voie,voieNum,login,mdp,nomabonnement) VALUES ('Karadjia','Reynold','Champs-sur-marne',77420,'rue du chateau',5,'rKaradjia','azerty','basic');
+INSERT INTO `compte` (nom,prenom,ville,cp,voie,voieNum,login,mdp,nomabonnement) VALUES ('Macedo','Goerges','Poissy',78360,'boulevard st germain',14,'gMacedo','azerty','premium');
+INSERT INTO `compte` (nom,prenom,ville,cp,voie,voieNum,login,mdp,nomabonnement) VALUES ('Shrize','Mathieu','Chessy',77260,'impasse de la marne',20,'mShrize','azerty','VIP');
+INSERT INTO `compte` (nom,prenom,ville,cp,voie,voieNum,login,mdp,nomabonnement) VALUES ('Uskegaise','Varbetim','Trappes',78341,'rue saint cyr',82,'vUskegaise','azerty','premium+');
 UNLOCK TABLES;
 
 
