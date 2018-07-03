@@ -88,16 +88,16 @@ app.listen(3000,()=>console.log('server is running port 3000'))
 
 /*RECHERCHE DE L EXISTANCE D UN COMPTE*/
   app.get('/connect/:login/:mdp', function (req, res) {  //parametres à definir ulterieurement ceci est un test
-    res.send('get a account' + req.body.mdp);
+    res.send('get a account' + req.params.mdp);
  
-    console.log('post ' + res.params);
+//    console.log('post ' + res.params);
      con.getConnection(function (err, connection) {
           // Use the connection
           
-        connection.query("SELECT login,mdp WHERE login = '"+req.params.login+"'AND mdp '"+req.params.mdp+"'", (err,rows)=> {  /*ou nom est l'identifiant 
+        connection.query("SELECT login,mdp WHERE login = "+req.params.login+"AND mdp "+req.params.mdp, (err,rows)=> {  /*ou nom est l'identifiant 
          d'un input */
           if (err) throw err;
-          if(rows.length==0)console.log('Pas de compte pour ce couple login/mdp');
+        //  if(rows.length==0)console.log('Pas de compte pour ce couple login/mdp');
           console.log(rows);res.send(rows); //affiche dans le navigateur
  
                       /*      Resultat type : [ RowDataPacket { id: 1, nom: 'Karadjia' } ]*/
