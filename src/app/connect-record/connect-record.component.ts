@@ -1,18 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Input, Output, EventEmitter } from '@angular/core';
 import { compteService } from '../../../services/compteService';//Services http
+import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-connect-record',
   templateUrl: './connect-record.component.html',
   styleUrls: ['./connect-record.component.scss']
 })
 export class ConnectRecordComponent implements OnInit {
-  
+  /*DECLARATION DES VARIABLES POUR LES FORMULAIRES*/
+  login: string;
+  mdp: string;
+
+
+  /*Variable de conditions*/
   @Input() isco: boolean;
   @Output() connectClick= new EventEmitter<Boolean>();//Ces deux variables permettent l'interaction 
   @Output() recordClick = new EventEmitter<Boolean>();// entre les deux composants
 
-  constructor() { }
+  constructor(private httpserv:compteService) { }
 
   ngOnInit() {
   }
@@ -36,9 +42,12 @@ export class ConnectRecordComponent implements OnInit {
   }
 
 
-  sendDataConnect(mdp:string,login:string){
+  sendDataConnect(/*form: NgForm*/){
 
-    console.log("send data to Connect "+mdp+ " "+login);
+    console.log("send data to Connect "+/*form.value+ */" login " + this.login + " mdp " + this.mdp);
+    this.httpserv.seConnecter(this.login,this.mdp);
+    //let values = Object.keys(form).map(key => form[key]);
+    
 
   }
 

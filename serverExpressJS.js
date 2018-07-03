@@ -63,7 +63,7 @@ app.listen(3000,()=>console.log('server is running port 3000'))
  
 });
 
-
+/*CREATION DU COMPTE*/
   app.post('/compte/creation', function (req, res) {  //parametres à definir ulterieurement ceci est un test
    res.send('Got a POST request')
 
@@ -87,14 +87,14 @@ app.listen(3000,()=>console.log('server is running port 3000'))
 
 
 /*RECHERCHE DE L EXISTANCE D UN COMPTE*/
-  app.post('/connect', function (req, res) {  //parametres à definir ulterieurement ceci est un test
-    res.send('Got a POST request')
+  app.get('/connect/:login/:mdp', function (req, res) {  //parametres à definir ulterieurement ceci est un test
+    res.send('get a account' + req.body.mdp);
  
-    console.log('post ' + res.body);
+    console.log('post ' + res.params);
      con.getConnection(function (err, connection) {
           // Use the connection
           
-        connection.query("SELECT login,mdp WHERE login = '"+req.body.login+"'AND mdp '"+req.body.mdp+"'", (err,rows)=> {  /*ou nom est l'identifiant 
+        connection.query("SELECT login,mdp WHERE login = '"+req.params.login+"'AND mdp '"+req.params.mdp+"'", (err,rows)=> {  /*ou nom est l'identifiant 
          d'un input */
           if (err) throw err;
           if(rows.length==0)console.log('Pas de compte pour ce couple login/mdp');

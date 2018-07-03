@@ -1,3 +1,4 @@
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -27,6 +28,7 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
     BrowserModule,
     FormsModule,
     BrowserModule,
+    HttpModule,
     /*BrowserAnimationsModule,
     LayoutModule,
     RouterModule.forRoot(appRoutes),*/

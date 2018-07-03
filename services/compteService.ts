@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';//since angular6 ----> before : 'rxjs/Observable'*/
 
 import { Injectable } from '@angular/core';   
-import {Http,Response, Headers, RequestOptions } from '@angular/http';   
+import {Http,Response, Headers, RequestOptions,HttpModule } from '@angular/http';   
 import { HttpClient } from '@angular/common/http';   
 import { Observable } from 'rxjs';   
 import { map } from 'rxjs/operators'; 
@@ -31,6 +31,13 @@ export class compteService {
   createAccount(){
 //  return this.http.post('http://localhost:8000/api/cats/', /*cat*/);
   }   // A LA PLACE DE LA REQUETE HTTP CI DESSUS METTRE <form action = "url" dans le formulaire*/
+
+  seConnecter(login:string,mdp:string){
+    console.log('HTTP Service : seConnecter'+login + ' '+mdp);
+    return this.http.get('http://localhost:3000/connect/'+ login+'/'+mdp)/*.pipe(map((response: Response) =>response.json()))*/;
+
+  }
+
 
   /*updateCat(cat: compte): Observable<void> {
     return this.http.put<void>('http://localhost:8000/api/cats/' + cat.name, cat);
