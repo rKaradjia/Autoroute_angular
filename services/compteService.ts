@@ -28,9 +28,9 @@ export class compteService {
     return this.http.get('http://localhost:3000/trajets/'+ id).pipe(map((response: Response) =>response.json()));  //RXJS 6+
   }
 
-  /*createAccount(cat: compte): Observable<compte> {
-    return this.http.post<compte>('http://localhost:8000/api/cats/', cat);
-  }    A LA PLACE DE LA REQUETE HTTP CI DESSUS METTRE <form action = "url" dans le formulaire*/
+  createAccount(){
+//  return this.http.post('http://localhost:8000/api/cats/', /*cat*/);
+  }   // A LA PLACE DE LA REQUETE HTTP CI DESSUS METTRE <form action = "url" dans le formulaire*/
 
   /*updateCat(cat: compte): Observable<void> {
     return this.http.put<void>('http://localhost:8000/api/cats/' + cat.name, cat);

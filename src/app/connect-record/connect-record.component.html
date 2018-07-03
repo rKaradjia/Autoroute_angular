@@ -3,14 +3,15 @@
 <p>
   Connectez vous 
 </p>
-<form #userForm="ngForm"   (ngSubmit)="onSave(userForm.value)">
+<form method="POST"   (ngSubmit)="sendDataConnect(mdp.value,login.value)">
+<!--<form action="localhost:3000/connect" method="POST">-->
 <tr>Identifiant</tr>
-   <td><input type="text" id="identifiant"></td>
+   <td><input type="text" id="login"></td>
 
   <tr>Mot de passe</tr> 
-<input type="password" id="pwd">
-   
-<input type="submit" value="{{valbutton}}" /> 
+<input type="password" id="mdp">
+<br>
+<input type="submit" value="Validez" /> 
 
 </form>
 
@@ -22,7 +23,7 @@
     Enregistrez-vous
   </p>
   
-<form>
+<form action="localhost:3000/newAccount">
   <tr>renseignement1</tr>
      <td><input type="text" id="identifiant"></td>
   

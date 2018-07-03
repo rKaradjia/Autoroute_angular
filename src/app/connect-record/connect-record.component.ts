@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Input, Output, EventEmitter } from '@angular/core';
-
+import { compteService } from '../../../services/compteService';//Services http
 @Component({
   selector: 'app-connect-record',
   templateUrl: './connect-record.component.html',
@@ -36,7 +36,11 @@ export class ConnectRecordComponent implements OnInit {
   }
 
 
+  sendDataConnect(mdp:string,login:string){
 
+    console.log("send data to Connect "+mdp+ " "+login);
+
+  }
 
 
 

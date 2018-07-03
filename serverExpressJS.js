@@ -20,7 +20,7 @@ app.use(bodyparser.urlencoded({
     host: "localhost",
     user: "root",
     password: "azerty",
-    database : "autorouteangular"
+    database : "autorouteangularv2"
   });
 
 
@@ -84,6 +84,30 @@ app.listen(3000,()=>console.log('server is running port 3000'))
    });
 
   });
+
+
+/*RECHERCHE DE L EXISTANCE D UN COMPTE*/
+  app.post('/connect', function (req, res) {  //parametres à definir ulterieurement ceci est un test
+    res.send('Got a POST request')
+ 
+    console.log('post ' + res.body);
+     con.getConnection(function (err, connection) {
+          // Use the connection
+          
+        connection.query("SELECT login,mdp WHERE login = '"+req.body.login+"'AND mdp '"+req.body.mdp+"'", (err,rows)=> {  /*ou nom est l'identifiant 
+         d'un input */
+          if (err) throw err;
+          if(rows.length==0)console.log('Pas de compte pour ce couple login/mdp');
+          console.log(rows);res.send(rows); //affiche dans le navigateur
+ 
+                      /*      Resultat type : [ RowDataPacket { id: 1, nom: 'Karadjia' } ]*/
+ 
+        });
+                 //met fin à la connection 
+       connection.release();
+    });
+ 
+   });
 
 
 //}
