@@ -88,33 +88,30 @@ app.listen(3000,()=>console.log('server is running port 3000'))
 
 /*RECHERCHE DE L EXISTANCE D UN COMPTE*/
   app.get('/connect/:login/:mdp', function (req, res) {  //parametres à definir ulterieurement ceci est un test
-    res.send('get a account' + req.params.mdp);
+    console.log('id dans url ' + req.params.login);
+
+    con.getConnection(function (err, connection) {
+      // Use the connection
+     // "SELECT RAP_BILAN FROM RAPPORT_VISITE where RAP_NUM = '"+numRapport+"' "
+      connection.query("SELECT login,mdp FROM compte WHERE login = '"+req.params.login+"'AND mdp='"+req.params.mdp+"'", (err,rows)=> {
+      if (err) throw err;
+       console.log(rows);res.send(rows); //affiche dans le navigateur
+
+      
+      });
+      //met fin à la connection 
+      connection.release();
+  });
  
-//    console.log('post ' + res.params);
-     con.getConnection(function (err, connection) {
-          // Use the connection
-          
-        connection.query("SELECT login,mdp WHERE login = "+req.params.login+"AND mdp "+req.params.mdp, (err,rows)=> {  /*ou nom est l'identifiant 
-         d'un input */
-          if (err) throw err;
-        //  if(rows.length==0)console.log('Pas de compte pour ce couple login/mdp');
-          console.log(rows);res.send(rows); //affiche dans le navigateur
- 
-                      /*      Resultat type : [ RowDataPacket { id: 1, nom: 'Karadjia' } ]*/
- 
-        });
-                 //met fin à la connection 
-       connection.release();
-    });
- 
-   });
+});
 
 
 //}
 
 
-app.get('/',(res,req )=>{
+app.get('/',(req,res )=>{
 
-      console.log("hello world")
+      console.log("hello world");
+      res.send("hello world");
 
 })

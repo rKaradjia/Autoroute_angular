@@ -19,11 +19,11 @@ import { map } from 'rxjs/operators';
 export class compteService {
   constructor(private http: Http) {}
 
-  getAllTrajets(){
+  getAllTrajets():Observable<any>{
     return this.http.get('http://localhost:3000/trajets').pipe(map((response: Response) =>response.json()));;
   }
 
-  getTrajet(id: number){
+  getTrajet(id: number):Observable<any>{
   //return this.http.post('http://localhost:3000/api/SaveUser/', user).map((response: Response) =>response.json())  //RXJS 5 -
     return this.http.get('http://localhost:3000/trajets/'+ id).pipe(map((response: Response) =>response.json()));  //RXJS 6+
   }
@@ -32,9 +32,17 @@ export class compteService {
 //  return this.http.post('http://localhost:8000/api/cats/', /*cat*/);
   }   // A LA PLACE DE LA REQUETE HTTP CI DESSUS METTRE <form action = "url" dans le formulaire*/
 
-  seConnecter(login:string,mdp:string){
+  seConnecter(login:string,mdp:string):Observable<any>{
     console.log('HTTP Service : seConnecter'+login + ' '+mdp);
-    return this.http.get('http://localhost:3000/connect/'+ login+'/'+mdp)/*.pipe(map((response: Response) =>response.json()))*/;
+    console.log("Resultat de la route "+this.http.get('http://localhost:3000/connect/'+login+'/'+mdp).subscribe((res:Response) => {
+      console.log(res.headers);
+      // you can assign the value to any variable here
+    }));
+    console.log(JSON.stringify(this.http.get('http://localhost:3000/connect/${login}/${mdp}').pipe(map((response: Response) =>response.json())))); 
+   
+    // console.log(JSON.stringify(this.http.get('http://localhost:3000/connect'+login+'/'+mdp)/*.pipe(map((response: Response) =>response.json()))))*/)); 
+    return this.http.get('http://localhost:3000').pipe(map((response: Response) =>response.json()));
+      //return this.http.get('http://localhost:3000/connect/'+ login+'/'+mdp).pipe(map((response: Response) =>response.json()));
 
   }
 
