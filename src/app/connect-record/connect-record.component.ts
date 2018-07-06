@@ -23,7 +23,7 @@ export class ConnectRecordComponent implements OnInit {
   ngOnInit() {
   }
 
-/*CONNECTION*/
+/*Bascule entre fenetre connexion et enregistrement*/
   onConnecter(/*si on veut passer des données*/){
     console.log("before the state was " + this.isco);
     this.connectClick.emit(this.isco/*si on veut passer des données*/);/*ici on met un event sur un bouton*/
@@ -41,14 +41,14 @@ export class ConnectRecordComponent implements OnInit {
 
   }
 
-
+/*Envoie les données au serveur pour se connecter*/
   sendDataConnect(/*form: NgForm*/){
 
     console.log("send data to Connect "+/*form.value+ */" login " + this.login + " mdp " + this.mdp);
+    console.log("send data connect TS FILE" + this.httpserv.seConnecter(this.login,this.mdp));
     this.httpserv.seConnecter(this.login,this.mdp);
     //let values = Object.keys(form).map(key => form[key]);
     
-
   }
 
 
