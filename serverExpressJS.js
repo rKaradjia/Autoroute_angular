@@ -104,7 +104,7 @@ app.listen(3000,()=>console.log('server is running port 3000'))
      // "SELECT RAP_BILAN FROM RAPPORT_VISITE where RAP_NUM = '"+numRapport+"' "
       connection.query("SELECT id FROM compte WHERE login = '"+req.params.login+"'AND mdp='"+req.params.mdp+"'", (err,rows)=> {
       if (err) throw err;
-       console.log(rows[0]);return res.json(rows[0]); //affiche dans le navigateur
+       console.log(rows[0].id);return res.json(rows[0].id); //affiche dans le navigateur
 
       
       });

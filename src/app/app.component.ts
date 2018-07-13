@@ -1,6 +1,10 @@
+import { ConnectRecordComponent } from './connect-record/connect-record.component';
 import { compteService } from './../../services/compteService'; //represente le contenu de la table dans la BDD 
 //+ requete HTTP
 import { Component, Input } from '@angular/core';
+
+//Import de composants
+
 
 //connexion au serveur nodeJS
 
@@ -15,12 +19,16 @@ import { Component, Input } from '@angular/core';
 export class AppComponent {
   
   title = 'app';
-  isAuth = false;
-  corecord = false;
+ // isAuth = false;
   lastUpdate = new Date();
+
+
+  isAuth:boolean = false; //affiche la barre de nav correspondant à l'état du visiteur : estCo / nonCo
+  corecord:boolean = false; /*Affichage du composant de connection/enregistrement*/
+
   constructor() {
 
-    setTimeout(
+   /* setTimeout(
 
       () => {
 
@@ -28,7 +36,7 @@ export class AppComponent {
 
       }, 4000
 
-    );
+    );*/
 
   }
   /*lastUpdate = new Promise((resolve, reject) => {
@@ -56,13 +64,31 @@ export class AppComponent {
 
    /*LOGIN*/
     connectrecord(){
-
+      /*Affichage du composant de connection/enregistrement*/
          this.corecord=true;
 
 
     }
 
-    seConnecter(event: Event) {
+    /*afficher la barre de nav pour les utilisateurs authentifié*/
+    showTrueCoNavBar(){
+          this.isAuth=true;
+    }
+
+    /*delloguer*/
+    setisNotAuth(){
+
+
+    }
+
+
+
+
+
+
+
+//connect-record.component
+   seConnecter(event: Event) {
       console.log(event); // You will see something here))
    
    }
@@ -70,7 +96,7 @@ export class AppComponent {
    sEnregistrer(event: Event) {
     console.log(event); // You will see something here))
  
- }
+   }
 
 
 

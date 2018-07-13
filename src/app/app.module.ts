@@ -1,6 +1,7 @@
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AbonnementComponent } from './abonnement/abonnement.component';
@@ -37,7 +38,9 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [compteService],
   bootstrap: [AppComponent]

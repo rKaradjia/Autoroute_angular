@@ -11,46 +11,89 @@ export class ConnectRecordComponent implements OnInit {
   /*DECLARATION DES VARIABLES POUR LES FORMULAIRES*/
   login: string;
   mdp: string;
-
+  identifiant: number; /* Log out --> NULL   LogIn --> NULL/number*/
 
   /*Variable de conditions*/
-  @Input() isco: boolean;
+  @Input() fenetre: boolean;
   @Output() connectClick= new EventEmitter<Boolean>();//Ces deux variables permettent l'interaction 
   @Output() recordClick = new EventEmitter<Boolean>();// entre les deux composants
 
-  constructor(private httpserv:compteService) { }
+  @Output() newNavBar = new EventEmitter();
+  
+  constructor(private httpserv:compteService) { 
+    this.httpserv=httpserv;
+
+
+  }
 
   ngOnInit() {
   }
 
 /*Bascule entre fenetre connexion et enregistrement*/
   onConnecter(/*si on veut passer des données*/){
-    console.log("before the state was " + this.isco);
-    this.connectClick.emit(this.isco/*si on veut passer des données*/);/*ici on met un event sur un bouton*/
-    this.isco=true;
-    console.log("now the state is " + this.isco);  
+    console.log("before the state was " + this.fenetre);
+    this.connectClick.emit(this.fenetre/*si on veut passer des données*/);/*ici on met un event sur un bouton*/
+    this.fenetre=true;
+    console.log("now the state is " + this.fenetre);  
 
   }
 
 
   onEnregistrer(){
-    console.log("before the state was " + this.isco);
-    this.recordClick.emit(this.isco);
-    this.isco=false;
-    console.log("now the state is " + this.isco);
+    console.log("before the state was " + this.fenetre);
+    this.recordClick.emit(this.fenetre);
+    this.fenetre=false;
+    console.log("now the state is " + this.fenetre);
 
   }
 
 /*Envoie les données au serveur pour se connecter*/
   sendDataConnect(/*form: NgForm*/){
 
+  var get:any;
+    console.log("this.HTTP    "+  this.httpserv);
     console.log("send data to Connect "+/*form.value+ */" login " + this.login + " mdp " + this.mdp);
     console.log("send data connect TS FILE" + this.httpserv.seConnecter(this.login,this.mdp));
-    this.httpserv.seConnecter(this.login,this.mdp);
-    //let values = Object.keys(form).map(key => form[key]);
+
+    //On souscrit auprès d'une fonction du Service HTTP
+    this.httpserv.seConnecter(this.login,this.mdp).subscribe(data=>{
+      console.log ("Connect Component Identifiant recuperer " +data);
+      this.identifiant=parseInt(data,10);
+      console.log("Connect Component Identifiant Memorise" +this.identifiant);
+    if((this.identifiant===undefined)||(this.identifiant==null)){
+
+    }else{
+
+      this.newNavBar.emit();
+
+    }
+    })
+
+    //get=this.httpserv.identifiantNum;
+    
+   /* get=this.httpserv.identifiantNum;*/
+    
+
+
     
   }
 
+  getIdentifiant(){
+   
+    return this.identifiant;/*identifiant de l'utilisateur en cours sera remplace (??) par Session*/
+
+  }
+
+
+
+
+
+
+
+
+
+
+  
 
 
 

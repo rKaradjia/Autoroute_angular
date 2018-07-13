@@ -23,11 +23,21 @@ import { catchError } from 'rxjs/operators'
 @Injectable()
 export class compteService {
 
+//Variable propres a chaques cas
+  /*Compte*/
+ identifiant: string; /*ce qui est recuperer*/
+ identifiantNum: number; /*retourné convertit en number (Int)*/
 
-test:String;
+  /*Trajets*/
+
 
   
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {
+
+   /* this.identifiant="";
+    this.identifiantNum=0;*/
+
+  }
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
@@ -46,43 +56,18 @@ test:String;
 //  return this.http.post('http://localhost:8000/api/cats/', /*cat*/);
   }   // A LA PLACE DE LA REQUETE HTTP CI DESSUS METTRE <form action = "url" dans le formulaire*/
 
-  seConnecter(login:string,mdp:string){
+  seConnecter(login:string,mdp:string):Observable<any>{
+    //recherche de l'identifiant correspondant aux parametres saisies
+    //Set dans une variable avec this
     console.log('HTTP Service : seConnecter'+login + ' '+mdp);
     
 
     console.log("TEST DU SERVICE DE CONNEXION");
+    
  
-   // console.log( this.http.get('http://localhost:3000/connect/'+login+'/'+mdp).pipe(
-     // catchError(this.handleError)));
-
-   /* return this.http.get('http://localhost:3000/connect/'+login+'/'+mdp).pipe(
-      catchError(this.handleError));*/
-     
-   /* console.log("1- Resultat de la route "+this.http.get('http://localhost:3000/connect/'+login+'/'+mdp).subscribe((res:Response) => {
-      console.log("1a-"+res.toString());
-      
-    }));*/
-   this.http.get('http://localhost:3000/connect/'+ login+'/'+mdp).pipe(map((response: Response) =>this.test=response.text()));
- 
-   this.http.get('http://localhost:3000/connect/'+ login+'/'+mdp).subscribe(
-         data => {
-      console.log("3a -" + data.text());
-      this.test = data.text();
-      
-     //console.log('Variable Test'+ this.test);
-
-
-     
-    });
-   
-    console.log('Variable Test'+ this.test);
-    return this.test;
-     
-   // console.log(JSON.stringify(this.http.get('http://localhost:3000/connect/${login}/${mdp}').pipe(map((response: Response) =>response.json())))); 
-   
-    // console.log(JSON.stringify(this.http.get('http://localhost:3000/connect'+login+'/'+mdp)/*.pipe(map((response: Response) =>response.json()))))*/)); 
- //   return this.http.get('http://localhost:3000').pipe(map((response: Response) =>response.json()));
-      //return this.http.get('http://localhost:3000/connect/'+ login+'/'+mdp).pipe(map((response: Response) =>response.toString()));
+    return this.http.get('http://localhost:3000/connect/'+ login+'/'+mdp);
+  //  return this.getIdentifiantNum();
+  // console.log("getter of idenifiantNum Compte Serv  "+this.getIdentifiantNum());
 
   }
 
@@ -94,4 +79,22 @@ test:String;
   deleteCat(dateTrajet: Date, villeDep: string, villeArrive: string) {  //a voir la recuperation d'un ou plusieurs
     return this.http.delete('http://localhost:8000/trajets/' + name).pipe(map((response: Response) =>response.json()));;
   }
+
+
+
+
+
+  /*GETTERS ET SETTERS : Optionnel*/
+
+
+  getIdentifiantNum(){
+
+    return this.identifiantNum;
+  }
+
+  setIdentifiantNum(identifiantNum){
+        this.identifiantNum=identifiantNum;
+  
+  }
+
 }
