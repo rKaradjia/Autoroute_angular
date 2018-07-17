@@ -13,12 +13,14 @@ export class ConnectRecordComponent implements OnInit {
   mdp: string;
   identifiant: number; /* Log out --> NULL   LogIn --> NULL/number*/
 
+
   /*Variable de conditions*/
   @Input() fenetre: boolean;
   @Output() connectClick= new EventEmitter<Boolean>();//Ces deux variables permettent l'interaction 
   @Output() recordClick = new EventEmitter<Boolean>();// entre les deux composants
 
   @Output() newNavBar = new EventEmitter();
+  messageco: boolean=false;
   
   constructor(private httpserv:compteService) { 
     this.httpserv=httpserv;
@@ -30,7 +32,7 @@ export class ConnectRecordComponent implements OnInit {
   }
 
 /*Bascule entre fenetre connexion et enregistrement*/
-  onConnecter(/*si on veut passer des données*/){
+  onEnregistrer(/*si on veut passer des données*/){
     console.log("before the state was " + this.fenetre);
     this.connectClick.emit(this.fenetre/*si on veut passer des données*/);/*ici on met un event sur un bouton*/
     this.fenetre=true;
@@ -39,7 +41,7 @@ export class ConnectRecordComponent implements OnInit {
   }
 
 
-  onEnregistrer(){
+  onConnecter(){
     console.log("before the state was " + this.fenetre);
     this.recordClick.emit(this.fenetre);
     this.fenetre=false;
@@ -60,10 +62,10 @@ export class ConnectRecordComponent implements OnInit {
       console.log ("Connect Component Identifiant recuperer " +data);
       this.identifiant=parseInt(data,10);
       console.log("Connect Component Identifiant Memorise" +this.identifiant);
-    if((this.identifiant===undefined)||(this.identifiant==null)){
-
+    if(this.identifiant==0){
+           this.messageco=true;
     }else{
-
+      this.messageco=false;
       this.newNavBar.emit();
 
     }

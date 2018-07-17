@@ -26,19 +26,7 @@ export class AppComponent {
   isAuth:boolean = false; //affiche la barre de nav correspondant à l'état du visiteur : estCo / nonCo
   corecord:boolean = false; /*Affichage du composant de connection/enregistrement*/
 
-  constructor() {
-
-   /* setTimeout(
-
-      () => {
-
-        this.isAuth = true;
-
-      }, 4000
-
-    );*/
-
-  }
+  constructor() {}
   /*lastUpdate = new Promise((resolve, reject) => {
 
     const date = new Date();
@@ -76,9 +64,10 @@ export class AppComponent {
     }
 
     /*delloguer*/
-    setisNotAuth(){
-
-
+    logOut(){
+      
+      this.isAuth=false;
+      this.corecord=true;
     }
 
 

@@ -1,5 +1,5 @@
 
-<div *ngIf=fenetre>
+<div *ngIf=!fenetre>
 <p>
   Connectez vous 
 </p><!--
@@ -16,10 +16,14 @@
 
 </form>
 
+  <p *ngIf="messageco">Il semblerait que votre saisie ne corresponde avec aucun compte...reessayez
+    si cette erreur persiste contactez l'administrateur
+  </p>
+
 </div>
 
 
-  <div *ngIf=!fenetre>
+  <div *ngIf=fenetre>
 <p>
     Enregistrez-vous
   </p>

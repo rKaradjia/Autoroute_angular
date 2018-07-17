@@ -98,15 +98,19 @@ app.listen(3000,()=>console.log('server is running port 3000'))
 /*RECHERCHE DE L EXISTANCE D UN COMPTE*/
   app.get('/connect/:login/:mdp', function (req, res) {  //parametres à definir ulterieurement ceci est un test
     console.log('id dans url ' + req.params.login);
-
+    console.log('Status' + res.statusCode);
     con.getConnection(function (err, connection) {
+      console.log ("Erreur oooo" + err);
       // Use the connection
      // "SELECT RAP_BILAN FROM RAPPORT_VISITE where RAP_NUM = '"+numRapport+"' "
-      connection.query("SELECT id FROM compte WHERE login = '"+req.params.login+"'AND mdp='"+req.params.mdp+"'", (err,rows)=> {
-      if (err) throw err;
-       console.log(rows[0].id);return res.json(rows[0].id); //affiche dans le navigateur
+    connection.query("SELECT id FROM compte WHERE login = '"+req.params.login+"'AND mdp='"+req.params.mdp+"'", (err,rows)=> {
+    if (rows.length == 0) {
+      return res.json(0);
+    }else{
+      console.log(rows[0].id);return res.json(rows[0].id);
+    }
 
-      
+      //console.log(rows[0].id);return res.json(rows[0].id);
       });
       //met fin à la connection 
       connection.release();

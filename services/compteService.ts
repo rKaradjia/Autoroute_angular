@@ -64,10 +64,9 @@ export class compteService {
 
     console.log("TEST DU SERVICE DE CONNEXION");
     
- 
+    //retourne directement au format JSON car on utilise HTTPCLIENT
     return this.http.get('http://localhost:3000/connect/'+ login+'/'+mdp);
-  //  return this.getIdentifiantNum();
-  // console.log("getter of idenifiantNum Compte Serv  "+this.getIdentifiantNum());
+  
 
   }
 
