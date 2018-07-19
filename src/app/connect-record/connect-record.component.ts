@@ -65,6 +65,7 @@ export class ConnectRecordComponent implements OnInit {
     if(this.identifiant==0){
            this.messageco=true;
     }else{
+      this.httpserv.setIdentifiantsCo(this.login,this.identifiant);
       this.messageco=false;
       this.newNavBar.emit();
 

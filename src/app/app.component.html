@@ -24,8 +24,8 @@
     </span>
     <span class="fill-remaining-space"></span>
     <button mat-button>Accueil</button>
-    <button mat-button>Mes trajets</button>
-    <button mat-button>Mes reservations</button>
+    <button mat-button (click)="voirTrajets()">Mes trajets</button>
+    <button mat-button (click)="voirReservations()">Mes reservations</button>
     <button mat-button>A determiner</button>
     <button mat-button>A determiner</button>
     <button mat-button (click)="logOut()">Logout</button>
@@ -37,12 +37,15 @@
 
 
 
-
-<app-connect-record *ngIf="corecord" (connectClick)="seConnecter()"
+<!--Afficher fenetre enregistrement / connexion-->
+<app-connect-record *ngIf="corecord" (connectClick)="seConnecter()" 
 (recordClick)="sEnregistrer()" (newNavBar)="showTrueCoNavBar()"></app-connect-record>
 
+<!--Voir les trajets de l abonne-->
+<app-mestrajets *ngIf="mestrajets"></app-mestrajets>
 
-
+<!--voir les reservations de l abonne-->
+<app-mesreservations *ngIf="mesreservations"></app-mesreservations>
 
 
 

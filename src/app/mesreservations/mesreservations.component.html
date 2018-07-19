@@ -1,3 +1,30 @@
-<p>
-  mesreservations works! :liste des reservations du client pour des services a definir
-</p>
+<button class="btn btn-success" 
+
+
+    (click)="voirReservations()">Voir mes reservations</button>
+
+
+    <button class="btn btn-success" 
+
+
+    (click)="Reserver()">Reserver</button><br><br>
+         
+<div *ngIf="lookReserv">
+    <table cellspacing="10">
+      <tr>
+             <td>Aire</td>
+             <td>Restaurants</td>
+             <td>Heure Arrive Prévue</td>
+             <td>Heure Depart Prévue</td>
+      </tr>
+
+     <tr *ngFor="let unereservation of lesreservations">
+           <td>{{unereservation.nomAire}}</td>
+           <td>{{unereservation.libelle}}</td>
+           <td>{{unereservation.dateA}}</td>
+           <td>{{unereservation.dateD}}</td>
+
+     </tr>
+</table>
+
+</div>

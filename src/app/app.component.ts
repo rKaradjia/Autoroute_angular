@@ -21,12 +21,16 @@ export class AppComponent {
   title = 'app';
  // isAuth = false;
   lastUpdate = new Date();
-
+  
 
   isAuth:boolean = false; //affiche la barre de nav correspondant à l'état du visiteur : estCo / nonCo
   corecord:boolean = false; /*Affichage du composant de connection/enregistrement*/
+  mestrajets:boolean = false;
+  mesreservations:boolean = false;
 
-  constructor() {}
+  constructor(private httpserv:compteService) {
+    this.httpserv=httpserv;
+  }
   /*lastUpdate = new Promise((resolve, reject) => {
 
     const date = new Date();
@@ -60,19 +64,34 @@ export class AppComponent {
 
     /*afficher la barre de nav pour les utilisateurs authentifié*/
     showTrueCoNavBar(){
-          this.isAuth=true;
+      this.corecord=false   //si on affiche la nouvelle barre alors le composant de con*
+          this.isAuth=true; //disparait 
     }
 
     /*delloguer*/
     logOut(){
-      
-      this.isAuth=false;
-      this.corecord=true;
+      this.httpserv.setIdentifiantsLogout();//reinitailisation des id(s) pour requete SQL
+      this.mestrajets=false;//arret de l'affiche du composant
+      this.mesreservations=false;//arret de l'affiche du composant
+      this.isAuth=false;//fin de la session
+      this.corecord=true;//afficher composant connexion/enregist*
+    }
+    
+
+    /*Afficher le composant pour la liste des trajets*/
+    voirTrajets(){
+      this.mesreservations=false;//arret affichage du composant
+
+      this.mestrajets=true;//affichage du composant 
     }
 
 
+    voirReservations(){
+      this.mestrajets=false;
 
+      this.mesreservations=true;
 
+    }
 
 
 

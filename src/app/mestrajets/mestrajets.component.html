@@ -1,3 +1,26 @@
-<p>
-  mestrajets liste les trajets du client
-</p>
+
+
+
+<p>moi</p>
+<table cellspacing="10">
+      <tr>
+             <td>Lieu depart</td>
+             <td>Lieu arrive</td>
+             <td>Heure depart</td>
+             <td>Heure arrive</td>
+      </tr>
+
+     <tr *ngFor="let untrajet of lestrajets">
+           <td>{{untrajet.lieuDepart}}</td>
+           <td>{{untrajet.lieuArrive}}</td>
+           <td>{{untrajet.heureDepart}}</td>
+           <td>{{untrajet.heureArrive}}</td>
+
+     </tr>
+
+
+</table>
+<!--
+<li *ngFor="let untrajet of lestrajets">
+    {{ untrajet.lieuDepart }}
+  </li>-->

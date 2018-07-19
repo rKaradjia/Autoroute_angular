@@ -22,9 +22,6 @@ app.use(bodyparser.urlencoded({
   extended: true
 }));
 
-
-
-
   con = mysql.createPool({
     host: "localhost",
     user: "root",
@@ -35,8 +32,6 @@ app.use(bodyparser.urlencoded({
 
 
 app.listen(3000,()=>console.log('server is running port 3000'))
-
-//function getTrajets(){  //a supprimer ?
 
    
     app.get('/trajets',(req,res)=>{ //definition de la route    localhost:3000/trajets
@@ -54,14 +49,22 @@ app.listen(3000,()=>console.log('server is running port 3000'))
 
 
   app.get('/trajets/:id',(req,res)=>{ //definition de la route    localhost:3000/trajets
-    console.log('id dans url ' + req.params.id);
+    console.log('identifiant de l abonne ' + req.params.id);
 
     con.getConnection(function (err, connection) {
       // Use the connection
      // "SELECT RAP_BILAN FROM RAPPORT_VISITE where RAP_NUM = '"+numRapport+"' "
-      connection.query("SELECT * FROM trajets WHERE trajets.id = '"+req.params.id+"'", (err,rows)=> {
-        if (err) throw err;
-       console.log(rows);res.send(rows); //affiche dans le navigateur
+      connection.query("SELECT lieuDepart,lieuArrive,heureDepart,heureArrive FROM trajets WHERE idCompte=(SELECT id FROM compte WHERE login = '"+req.params.id+"')", (err,rows)=> {
+        if (rows.length == 0) {
+          console.log(" On cherche tous les trajets de l abonne "+err);
+          return res.json(0);
+        }else{
+          console.log(rows);
+          return res.json(rows);
+          //return res.json(rows);
+        }  //affiche dans le navigateur
+    /*    if (err) throw err;
+        console.log(rows);res.send(rows);*/
 
        /*      Resultat type : [ RowDataPacket { id: 1, nom: 'Karadjia' } ]*/
 

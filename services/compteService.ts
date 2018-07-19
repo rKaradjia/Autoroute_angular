@@ -43,14 +43,17 @@ export class compteService {
     return Promise.reject(error.message || error);
  }
 
+
+ //Affiche tous les trajets effetués par un abonné
   getAllTrajets():Observable<any>{
-    return this.http.get('http://localhost:3000/trajets').pipe(map((response: Response) =>response.json()));;
+    console.log("getAllTrajets "+this.identifiant);
+    return this.http.get('http://localhost:3000/trajets/'+this.identifiant);
   }
 
-  getTrajet(id: number):Observable<any>{
+ /* getTrajet(id: number):Observable<any>{
   //return this.http.post('http://localhost:3000/api/SaveUser/', user).map((response: Response) =>response.json())  //RXJS 5 -
     return this.http.get('http://localhost:3000/trajets/'+ id).pipe(map((response: Response) =>response.json()));  //RXJS 6+
-  }
+  }*/
 
   createAccount(){
 //  return this.http.post('http://localhost:8000/api/cats/', /*cat*/);
@@ -86,14 +89,18 @@ export class compteService {
   /*GETTERS ET SETTERS : Optionnel*/
 
 
-  getIdentifiantNum(){
+  setIdentifiantsCo(login:string,num:number){
+        this.identifiant=login;
+        this.identifiantNum=num;
+        console.log("identifiant enregistrer dans le service " + this.identifiant + " " + this.identifiantNum);
 
-    return this.identifiantNum;
   }
 
-  setIdentifiantNum(identifiantNum){
-        this.identifiantNum=identifiantNum;
-  
-  }
+  setIdentifiantsLogout(){
+    this.identifiant='';
+    this.identifiantNum=0;
+    console.log("identifiant reinitialiser dans le service " + this.identifiant + " " + this.identifiantNum);
+
+}
 
 }
