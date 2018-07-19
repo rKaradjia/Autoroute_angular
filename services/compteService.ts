@@ -50,10 +50,14 @@ export class compteService {
     return this.http.get('http://localhost:3000/trajets/'+this.identifiant);
   }
 
- /* getTrajet(id: number):Observable<any>{
-  //return this.http.post('http://localhost:3000/api/SaveUser/', user).map((response: Response) =>response.json())  //RXJS 5 -
-    return this.http.get('http://localhost:3000/trajets/'+ id).pipe(map((response: Response) =>response.json()));  //RXJS 6+
-  }*/
+
+  //Affiche tous les trajets effetués par un abonné
+  getAllReservations():Observable<any>{
+    console.log("getAllTrajets "+this.identifiant);
+    return this.http.get('http://localhost:3000/reservations/'+this.identifiant);
+  }
+
+ 
 
   createAccount(){
 //  return this.http.post('http://localhost:8000/api/cats/', /*cat*/);
@@ -82,7 +86,10 @@ export class compteService {
     return this.http.delete('http://localhost:8000/trajets/' + name).pipe(map((response: Response) =>response.json()));;
   }
 
-
+/* getTrajet(id: number):Observable<any>{
+  //return this.http.post('http://localhost:3000/api/SaveUser/', user).map((response: Response) =>response.json())  //RXJS 5 -
+    return this.http.get('http://localhost:3000/trajets/'+ id).pipe(map((response: Response) =>response.json()));  //RXJS 6+
+  }*/
 
 
 
