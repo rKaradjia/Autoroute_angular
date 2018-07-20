@@ -49,11 +49,10 @@ app.listen(3000,()=>console.log('server is running port 3000'))
 
 
   app.get('/trajets/:id',(req,res)=>{ //definition de la route    localhost:3000/trajets
-    console.log('identifiant de l abonne ' + req.params.id);
+    console.log('Serveur ExpressJS : Les trajets de l abonne : ' + req.params.id);
 
     con.getConnection(function (err, connection) {
-      // Use the connection
-     // "SELECT RAP_BILAN FROM RAPPORT_VISITE where RAP_NUM = '"+numRapport+"' "
+      
       connection.query("SELECT lieuDepart,lieuArrive,heureDepart,heureArrive FROM trajets WHERE idCompte=(SELECT id FROM compte WHERE login = '"+req.params.id+"')", (err,rows)=> {
         if (rows.length == 0) {
           console.log(" On cherche tous les trajets de l abonne "+err);
@@ -61,12 +60,8 @@ app.listen(3000,()=>console.log('server is running port 3000'))
         }else{
           console.log(rows);
           return res.json(rows);
-          //return res.json(rows);
-        }  //affiche dans le navigateur
-    /*    if (err) throw err;
-        console.log(rows);res.send(rows);*/
-
-       /*      Resultat type : [ RowDataPacket { id: 1, nom: 'Karadjia' } ]*/
+          
+        }  
 
       });
       //met fin à la connection 
@@ -78,11 +73,10 @@ app.listen(3000,()=>console.log('server is running port 3000'))
 
 
 app.get('/reservations/:id',(req,res)=>{ //definition de la route    localhost:3000/trajets
-  console.log('identifiant de l abonne ' + req.params.id);
+  console.log('Serveur ExpressJS : Les reservations de l abonne :' + req.params.id);
 
   con.getConnection(function (err, connection) {
-    // Use the connection
-   // "SELECT RAP_BILAN FROM RAPPORT_VISITE where RAP_NUM = '"+numRapport+"' "
+    
     connection.query("SELECT aireAutoroute.libelle AS nomAire,restaurants.libelle,reservation.dateA,reservation.dateD "+
     " FROM reservation INNER JOIN restoAire ON reservation.idRestoAire=restoAire.id "+
     " INNER JOIN restaurants ON restoAire.idResto=restaurants.id "+
@@ -94,12 +88,9 @@ app.get('/reservations/:id',(req,res)=>{ //definition de la route    localhost:3
       }else{
         console.log(rows);
         return res.json(rows);
-        //return res.json(rows);
-      }  //affiche dans le navigateur
-  /*    if (err) throw err;
-      console.log(rows);res.send(rows);*/
-
-     /*      Resultat type : [ RowDataPacket { id: 1, nom: 'Karadjia' } ]*/
+        
+      }  
+  
 
     });
     //met fin à la connection 
@@ -110,20 +101,48 @@ app.get('/reservations/:id',(req,res)=>{ //definition de la route    localhost:3
 
 
 
-/*CREATION DU COMPTE*/
-  app.post('/compte/creation', function (req, res) {  //parametres à definir ulterieurement ceci est un test
-   res.send('Got a POST request')
+app.get('/abonnements',(req,res)=>{ //definition de la route    localhost:3000/trajets
+  console.log('Serveur ExpressJS : Recupération des abonnements pour affichage dans une liste');
 
-   console.log('post ' + res.body);
+  con.getConnection(function (err, connection) {
+    // Use the connection
+   // "SELECT RAP_BILAN FROM RAPPORT_VISITE where RAP_NUM = '"+numRapport+"' "
+    connection.query("SELECT nom from abonnement", (err,rows)=> {
+      if (rows.length == 0) {
+        console.log(" Erreur lors de la recuperation des abonnements " + err);
+        return res.json(0);
+      }else{
+        console.log(rows);
+        return res.json(rows);
+        
+      }  
+
+    });
+    //met fin à la connection 
+    connection.release();
+});
+
+});
+
+
+
+/*CREATION DU COMPTE /:nom/:prenom/:ville/:cp/:voie/:numvoie/:login/:mdp/:abonnement*/
+  app.post('/compte/creation', function (req, res) {  //parametres à definir ulterieurement ceci est un test
+   res.send('Serveur ExpressJS : Creation d un compte');
+  
+   console.log('Nom du nouvel abonné ' + req.body.nom  + "  " + req.body.prenom + "  " +req.body.ville + "  "+
+    " " + parseInt(req.body.cp,10) + "  " +  req.body.voie + "  " + parseInt(req.body.numVoie,10) +  "  "+
+  req.body.login +  "  " + req.body.mdp  + "  " + req.body.nomAbonnement ) ;
     con.getConnection(function (err, connection) {
          // Use the connection
-         
-       connection.query("INSERT INTO compte (nom) VALUES("+res.body.nom+")", (err,rows)=> {  /*ou nom est l'identifiant 
+         //parseInt(req.params.year, 10);
+       connection.query("INSERT INTO compte (nom,prenom,ville,cp,voie,voieNum,login,mdp,nomAbonnement"+
+      ") VALUES('"+req.body.nom+"','"+req.body.prenom+"','"+req.body.ville+"',"+parseInt(req.body.cp,10)+","+
+        "'"+req.body.voie+"',"+parseInt(req.body.numVoie,10)+",'"+req.body.login+"','"+req.body.mdp+"',"+
+         "'"+ req.body.nomAbonnement+"')", (err,rows)=> {  /*ou nom est l'identifiant 
         d'un input */
          if (err) throw err;
          console.log(rows);res.send(rows); //affiche dans le navigateur
-
-                     /*      Resultat type : [ RowDataPacket { id: 1, nom: 'Karadjia' } ]*/
 
        });
                 //met fin à la connection 
@@ -135,12 +154,12 @@ app.get('/reservations/:id',(req,res)=>{ //definition de la route    localhost:3
 
 /*RECHERCHE DE L EXISTANCE D UN COMPTE*/
   app.get('/connect/:login/:mdp', function (req, res) {  //parametres à definir ulterieurement ceci est un test
-    console.log('id dans url ' + req.params.login);
+    console.log('Serveur ExpressJS : Ouverture du compte de :' + req.params.id);
+
     console.log('Status' + res.statusCode);
     con.getConnection(function (err, connection) {
       console.log ("Erreur oooo" + err);
-      // Use the connection
-     // "SELECT RAP_BILAN FROM RAPPORT_VISITE where RAP_NUM = '"+numRapport+"' "
+      
     connection.query("SELECT id FROM compte WHERE login = '"+req.params.login+"'AND mdp='"+req.params.mdp+"'", (err,rows)=> {
     if (rows.length == 0) {
       return res.json(0);
@@ -148,7 +167,7 @@ app.get('/reservations/:id',(req,res)=>{ //definition de la route    localhost:3
       console.log(rows[0].id);return res.json(rows[0].id);
     }
 
-      //console.log(rows[0].id);return res.json(rows[0].id);
+     
       });
       //met fin à la connection 
       connection.release();
@@ -157,7 +176,7 @@ app.get('/reservations/:id',(req,res)=>{ //definition de la route    localhost:3
 });
 
 
-//}
+
 
 
 app.get('/',(req,res )=>{

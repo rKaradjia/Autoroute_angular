@@ -23,17 +23,49 @@
 </div>
 
 
+
+
+
   <div *ngIf=fenetre>
 <p>
-    Enregistrez-vous
+    Creer un compte
   </p>
   
-<form action="localhost:3000/newAccount">
-  <tr>renseignement1</tr>
-     <td><input type="text" id="identifiant"></td>
+<form (ngSubmit)="createAccount(selectedAbonnement.value)">
+  <tr>Nom</tr>
+     <td><input type="text" name="nom"[(ngModel)]="nom"></td>
   
-    <tr>renseignement2</tr> 
-  <input type="password" id="pwd">
+    <tr>Prenom</tr> 
+  <input type="text" name="prenom" [(ngModel)]="prenom">
+
+  <tr>ville</tr> 
+  <input type="text" name="ville" [(ngModel)]="ville">
+
+  <tr>Code Postal</tr> 
+  <input type="text" name="cp" [(ngModel)]="cp">
+
+  <tr>Voie</tr> 
+  <input type="text" name="voie" [(ngModel)]="voie">
+
+  <tr>Numero de la voie</tr> 
+  <input type="text" name="numVoie" [(ngModel)]="numVoie">
+
+  <tr>Login</tr> 
+  <input type="text" name="login" [(ngModel)]="login">
+
+  <tr>Mdp</tr> 
+  <input type="password" name="mdp" [(ngModel)]="mdp">
+
+  <tr>Abonnment choisit</tr> 
+  <select #selectedAbonnement (change)='SelectedAbonnement = selectedAbonnement.value'>
+    <option *ngFor="let unabonnement of lesabonnements" [value]="unabonnement.nom">
+      {{unabonnement.nom}}
+    </option>
+ </select>
+ 
+  <br>
+  <input type="submit" value="Validez" /> 
+
   </form>
   </div>
 

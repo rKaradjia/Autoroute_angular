@@ -11,6 +11,15 @@ export class ConnectRecordComponent implements OnInit {
   /*DECLARATION DES VARIABLES POUR LES FORMULAIRES*/
   login: string;
   mdp: string;
+  nom: string;
+  prenom: string;
+  ville: string;
+  cp: number;
+  voie:string;
+  numVoie: number;
+  SelectedAbonnement: string = null;
+  
+
   identifiant: number; /* Log out --> NULL   LogIn --> NULL/number*/
 
 
@@ -18,9 +27,12 @@ export class ConnectRecordComponent implements OnInit {
   @Input() fenetre: boolean;
   @Output() connectClick= new EventEmitter<Boolean>();//Ces deux variables permettent l'interaction 
   @Output() recordClick = new EventEmitter<Boolean>();// entre les deux composants
-
   @Output() newNavBar = new EventEmitter();
   messageco: boolean=false;
+
+  //Tableau
+  lesabonnements=[];
+
   
   constructor(private httpserv:compteService) { 
     this.httpserv=httpserv;
@@ -34,6 +46,16 @@ export class ConnectRecordComponent implements OnInit {
 /*Bascule entre fenetre connexion et enregistrement*/
   onEnregistrer(/*si on veut passer des données*/){
     console.log("before the state was " + this.fenetre);
+    this.httpserv.getNomOfAbonnements().subscribe(data=>{
+      console.log("Les trajets de l abonne : ");
+      console.log(data);
+      if(data==0){
+
+      }else{
+        this.lesabonnements=data;
+        
+      }
+    })
     this.connectClick.emit(this.fenetre/*si on veut passer des données*/);/*ici on met un event sur un bouton*/
     this.fenetre=true;
     console.log("now the state is " + this.fenetre);  
@@ -72,13 +94,30 @@ export class ConnectRecordComponent implements OnInit {
     }
     })
 
-    //get=this.httpserv.identifiantNum;
-    
-   /* get=this.httpserv.identifiantNum;*/
-    
+  }
 
 
-    
+  createAccount(){
+    console.log("Creation du compte "+this.SelectedAbonnement );
+    console.log ("Nom "+this.nom+"Prenom "+this.prenom+"Ville "+this.ville+"Code postal "+this.cp+ 
+     "Voie "+this.voie+"Num Voie "+this.numVoie+"Login "+this.login+"Mot_de_passe "+this.mdp +
+     "Abonnement choisit "+this.SelectedAbonnement );
+    this.httpserv.createAccount(this.nom,this.prenom,this.ville,this.cp,this.voie,this.numVoie,
+                              this.login,this.mdp,this.SelectedAbonnement).subscribe(data=>{
+                                console.log("Les trajets de l abonne : ");
+                                console.log(data);
+                                if(data==0){
+                          
+                                }else{
+                                  
+                                }
+                          
+                          
+                          
+                                
+                            
+                              })
+
   }
 
   getIdentifiant(){

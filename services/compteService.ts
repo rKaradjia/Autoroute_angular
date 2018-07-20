@@ -12,6 +12,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';   
 import { map } from 'rxjs/operators'; 
 import { catchError } from 'rxjs/operators'
+import { HttpHeaders } from '@angular/common/http';//Pour les requetes post
+import {HttpParams} from '@angular/common/http';
 
 /*export interface compte {
     id: number;
@@ -57,10 +59,37 @@ export class compteService {
     return this.http.get('http://localhost:3000/reservations/'+this.identifiant);
   }
 
+
+  //Recuperation des noms des abonnements pour les afficher dans une liste déroulante
+  getNomOfAbonnements():Observable<any>{
+    console.log("getNomOfAbonnements "+this.identifiant);
+    return this.http.get('http://localhost:3000/abonnements');
+  }
  
 
-  createAccount(){
-//  return this.http.post('http://localhost:8000/api/cats/', /*cat*/);
+  createAccount(nom:string,prenom:string,ville:string,cp:number,voie:string,numVoie:number,
+    login:string,mdp:string,SelectedAbonnement:string){
+   
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          'Authorization': 'my-auth-token'
+        })
+      };
+
+      let httpParams = new HttpParams()
+    .append("nom", nom)
+    .append("prenom", prenom)
+    .append("ville",ville)
+    .append("cp",cp.toString()) //Obligation de convertir une reconversation aura lieu dans le serv
+    .append("voie",voie)
+    .append("numVoie",numVoie.toString()) //Obligation de convertir une reconversation aura lieu dans le serv   
+    .append("login",login)
+    .append("mdp",mdp)
+    .append("nomAbonnement",SelectedAbonnement);
+
+    return this.http.post('http://localhost:3000/compte/creation'/*+nom+'/'+prenom+'/'+ville+'/'+
+      cp+'/'+voie+'/'+numVoie+'/'+login+'/'+mdp+'/'+SelectedAbonnement*/,httpParams/*,httpOptions*/);
   }   // A LA PLACE DE LA REQUETE HTTP CI DESSUS METTRE <form action = "url" dans le formulaire*/
 
   seConnecter(login:string,mdp:string):Observable<any>{
