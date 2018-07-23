@@ -65,6 +65,17 @@ export class compteService {
     console.log("getNomOfAbonnements "+this.identifiant);
     return this.http.get('http://localhost:3000/abonnements');
   }
+
+  //Recuperation des noms des abonnements pour les afficher dans une liste déroulante
+  getAllAire():Observable<any>{
+    console.log("getAire "+this.identifiant);
+    return this.http.get('http://localhost:3000/aire');
+  }
+
+  getEtablissementByAire(aire:string):Observable<any>{
+    console.log("getAire "+this.identifiant);
+    return this.http.get('http://localhost:3000/aire/'+aire);
+  }
  
 
   createAccount(nom:string,prenom:string,ville:string,cp:number,voie:string,numVoie:number,

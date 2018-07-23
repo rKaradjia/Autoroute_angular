@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { compteService } from '../../../services/compteService';//Services http
+import { DateTimeAdapter } from 'ng-pick-datetime';
 
 @Component({
   selector: 'app-mesreservations',
@@ -8,9 +9,14 @@ import { compteService } from '../../../services/compteService';//Services http
 })
 export class MesreservationsComponent implements OnInit {
   lesreservations = [];
-  lookReserv:boolean=false
+  lesaires = [];
+  lesrestaurants = [];
+  lookReserv:boolean=false;
+  chooseAire:boolean=false;
 
-
+  SelectedAire: string = null;
+  SelectedDepart:Date;
+  SelectedArrive:Date;
   constructor(private httpserver: compteService) { 
   this.httpserver=httpserver;
   }
@@ -32,10 +38,57 @@ export class MesreservationsComponent implements OnInit {
         this.lesreservations=data;
       }
 
-
-
-      
   
     })
   }
+
+  Reserver(){
+
+      this.lookReserv=false;
+      this.getAllAire();
+
+  }
+
+
+  getAllAire(){
+     this.httpserver.getAllAire().subscribe(data=>{
+      console.log("Les trajets de l abonne : ");
+      console.log(data);
+      if(data==0){
+
+      }else{
+        
+        this.lesaires=data;
+      }
+
+  
+    })
+
+
+  }
+
+
+
+
+  getEtablissement(){
+    console.log("Aire selectionne par le client : "+this.SelectedAire);
+    this.httpserver.getEtablissementByAire(this.SelectedAire).subscribe(data=>{
+     
+      console.log(data);
+      if(data==0){
+
+      }else{
+        this.chooseAire=true;
+        this.lesrestaurants=data;
+      }
+
+  
+    })
+
+    
+  }
+
+
+  
+
 }

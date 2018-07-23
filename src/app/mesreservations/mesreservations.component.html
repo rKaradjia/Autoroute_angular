@@ -26,5 +26,36 @@
 
      </tr>
 </table>
+</div>
+
+<div *ngIf="!lookReserv">
+
+    <select #selectedAire (change)='SelectedAire = selectedAire.value'>
+        <option *ngFor="let uneaire of lesaires" [value]="uneaire.libelle">
+          {{uneaire.libelle}}
+        </option>
+     </select>
+
+     <button class="btn btn-success" 
+
+
+     (click)="getEtablissement()">Valider</button>   
+     <br><br>
+  <div *ngIf="chooseAire">
+     <select #selectedResto (change)='SelectedResto = selectedResto.value'>
+        <option *ngFor="let unrestaurant of lesrestaurants" [value]="unrestaurant.libelle">
+          {{unrestaurant.libelle}}
+        </option>
+     </select>
+    <br>
+
+     <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date Time">
+     <owl-date-time #dt1 (change)='SelectedDepart = dt1.value'></owl-date-time>
+
+     <input [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2" placeholder="Date Time">
+     <owl-date-time #dt2 (change)='SelectedArrive = dt2.value'></owl-date-time> 
+
+    </div>
+
 
 </div>

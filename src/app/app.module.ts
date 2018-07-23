@@ -15,6 +15,9 @@ import { compteService } from './../../services/compteService';
 //import { MaterialModule } from './material.module';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
 
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +36,7 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
     /*BrowserAnimationsModule,
     LayoutModule,
     RouterModule.forRoot(appRoutes),*/
+    //ANGULAR MATERIALS
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -40,7 +44,11 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
     MatListModule,
     MatCardModule,
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    //DATETIME PICKER
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
+    BrowserAnimationsModule
   ],
   providers: [compteService],
   bootstrap: [AppComponent]

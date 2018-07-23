@@ -126,7 +126,60 @@ app.get('/abonnements',(req,res)=>{ //definition de la route    localhost:3000/t
 
 
 
-/*CREATION DU COMPTE /:nom/:prenom/:ville/:cp/:voie/:numvoie/:login/:mdp/:abonnement*/
+app.get('/aire',(req,res)=>{ //definition de la route    localhost:3000/trajets
+  console.log('Serveur ExpressJS : Recupération des aires');
+
+  con.getConnection(function (err, connection) {
+    // Use the connection
+   // "SELECT RAP_BILAN FROM RAPPORT_VISITE where RAP_NUM = '"+numRapport+"' "
+    connection.query("SELECT libelle from aireAutoroute", (err,rows)=> {
+      if (rows.length == 0) {
+        console.log(" Erreur lors de la recuperation des aires " + err);
+        return res.json(0);
+      }else{
+        console.log(rows);
+        return res.json(rows);
+        
+      }  
+
+    });
+    //met fin à la connection 
+    connection.release();
+});
+
+});
+
+
+app.get('/aire/:nomaire',(req,res)=>{ //definition de la route    localhost:3000/trajets
+  console.log('Serveur ExpressJS : recupération des restos sur une aire' + req.params.nomaire);
+
+  con.getConnection(function (err, connection) {
+   /* select restaurants.libelle from restoAire 
+    inner join restaurants on restoAire.idResto=restaurants.id 
+    where restoAire.idAire=(select id from aireAutoroute where libelle = 'mlv');*/
+
+    connection.query("SELECT restaurants.libelle from restoAire "+
+     "INNER JOIN restaurants ON restoAire.idResto=restaurants.id WHERE "+
+     "restoAire.idAire = (SELECT id FROM aireAutoroute WHERE libelle ='"+req.params.nomaire+"')", (err,rows)=> {
+      if (rows.length == 0) {
+        console.log(" Erreur lors de la recuperation des aires " + err);
+        return res.json(rows);
+      }else{
+        console.log(rows);
+        return res.json(rows);
+        
+      }  
+
+    });
+    //met fin à la connection 
+    connection.release();
+});
+
+});
+
+
+
+/*CREATION DU COMPTE*/
   app.post('/compte/creation', function (req, res) {  //parametres à definir ulterieurement ceci est un test
    res.send('Serveur ExpressJS : Creation d un compte');
   
@@ -139,10 +192,15 @@ app.get('/abonnements',(req,res)=>{ //definition de la route    localhost:3000/t
        connection.query("INSERT INTO compte (nom,prenom,ville,cp,voie,voieNum,login,mdp,nomAbonnement"+
       ") VALUES('"+req.body.nom+"','"+req.body.prenom+"','"+req.body.ville+"',"+parseInt(req.body.cp,10)+","+
         "'"+req.body.voie+"',"+parseInt(req.body.numVoie,10)+",'"+req.body.login+"','"+req.body.mdp+"',"+
-         "'"+ req.body.nomAbonnement+"')", (err,rows)=> {  /*ou nom est l'identifiant 
-        d'un input */
-         if (err) throw err;
-         console.log(rows);res.send(rows); //affiche dans le navigateur
+         "'"+ req.body.nomAbonnement+"')", (err,rows)=> {  
+          if (rows.length == 0) {
+            console.log(" Erreur lors de la recuperation des abonnements " + err);
+            return res.send();
+          }else{
+            console.log(rows);
+            return res.send();
+            
+          }   //affiche dans le navigateur
 
        });
                 //met fin à la connection 
