@@ -78,6 +78,41 @@ export class compteService {
   }
  
 
+
+  findIdRestoAire(nomAire:string,nomResto:string,){
+
+    return this.http.get('http://localhost:3000/idRestoAire/'+nomAire+'/'+nomResto);
+
+
+  }
+
+
+
+  Reserver(idrestoAire:number,datearrive:Date,datedepart:Date){
+   
+  
+
+          console.log("Reserver " + this.identifiantNum+" " +idrestoAire + " " + datearrive + " " + datedepart);
+          console.log("identifiant restoAire " +idrestoAire);
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          'Authorization': 'my-auth-token'
+        })
+      };
+
+      let httpParams = new HttpParams()
+    .append("idnum",this.identifiantNum.toString())  
+   /* .append("aire", nomAire)
+    .append("resto", nomResto)*/
+    .append("idrestoAire",idrestoAire.toString())
+    .append("arrive",datearrive.toString())
+    .append("depart",datedepart.toString());//Obligation de convertir une reconversation aura lieu dans le serv
+
+    return this.http.post('http://localhost:3000/reservations'/*+nom+'/'+prenom+'/'+ville+'/'+
+      cp+'/'+voie+'/'+numVoie+'/'+login+'/'+mdp+'/'+SelectedAbonnement*/,httpParams/*,httpOptions*/);
+  }   // A LA PLACE DE LA REQ
+
   createAccount(nom:string,prenom:string,ville:string,cp:number,voie:string,numVoie:number,
     login:string,mdp:string,SelectedAbonnement:string){
    

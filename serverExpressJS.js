@@ -179,6 +179,80 @@ app.get('/aire/:nomaire',(req,res)=>{ //definition de la route    localhost:3000
 
 
 
+
+app.get('/idRestoAire/:nomaire/:nomresto',(req,res)=>{ //definition de la route    localhost:3000/trajets
+  console.log('Serveur ExpressJS : recupération d l identifiant' + req.params.nomaire + " " + req.params.nomresto);
+
+  con.getConnection(function (err, connection) {
+   /* select restoAire.id from restoAire 
+   inner join restaurants on restoAire.idResto=restaurants.id 
+   inner join aireAutoroute on restoAire.idAire=aireAutoroute.id 
+   where restaurants.libelle='la restauration artisanale' and aireAutoroute.libelle = 'mlv';
+*/
+
+    connection.query("SELECT restoAire.id from restoAire "+
+      "INNER JOIN restaurants ON restoAire.idResto=restaurants.id "+
+      "INNER JOIN aireAutoroute ON restoAire.idAire=aireAutoroute.id "+
+      "WHERE restaurants.libelle ='"+req.params.nomresto+"'AND aireAutoroute.libelle ='"+req.params.nomaire+"'"
+     ,(err,rows)=> {
+      if (rows.length == 0) {
+        console.log(" Erreur lors de la recuperation des aires " + err);
+        return res.json(rows);
+      }else{
+        console.log(rows[0].id);
+        return res.json(rows[0].id);
+        /*idrestoAire = parseInt(res.json(rows[0].id),10);
+        return idrestoAire;*/
+        
+      }  
+
+    })
+    //met fin à la connection 
+    connection.release();
+});
+
+});
+
+
+
+
+/*Reservation*/
+app.post('/reservations', function (req, res) {  //parametres à definir ulterieurement ceci est un test
+  res.send('Serveur ExpressJS : Reserver');
+ 
+  console.log('Nom de la reservation ' + req.body.idnum+" "+ req.body.idrestoAire+ "  " +req.body.arrive);
+  console.log(req.body.depart);
+   
+
+   con.getConnection(function (err, connection) {
+   /* insert into reservation (idCompte,idRestoAire,dateA,dateD) values 
+                                                (1,1,STR_TO_DATE(substr('Thu Jul 26 2018 13:00:10 GMT 0200 (CEST)',1,24),'%a %b %d %Y %H:%i:%s'),
+                                                STR_TO_DATE(substr('Thu Jul 26 2018 13:00:10 GMT 0200 (CEST)',1,24),'%a %b %d %Y %H:%i:%s'));*/
+
+      connection.query(/*A VOIR */"insert into reservation (idCompte,idRestoAire,dateA,dateD) values "+
+     " ("+parseInt(req.body.idnum,10)+","+parseInt(req.body.idrestoAire,10)+","+
+     " STR_TO_DATE(substr('"+req.body.arrive+"',1,24),'%a %b %d %Y %H:%i:%s'), "+
+     " STR_TO_DATE(substr('"+req.body.depart+"',1,24),'%a %b %d %Y %H:%i:%s'))", (err,rows)=> {  
+         if (rows.length == 0) {
+           console.log(" Erreur lors de la recuperation des abonnements " + err);
+           return res.send();
+         }else{
+           console.log(rows);
+           return res.send();
+           
+         }   //affiche dans le navigateur
+
+      });
+               //met fin à la connection 
+     connection.release();
+  });
+
+ });
+
+
+
+
+
 /*CREATION DU COMPTE*/
   app.post('/compte/creation', function (req, res) {  //parametres à definir ulterieurement ceci est un test
    res.send('Serveur ExpressJS : Creation d un compte');
