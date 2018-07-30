@@ -85,8 +85,20 @@ export class compteService {
 
 
   }
-
-
+///reservations/delete/:iduser/:idRestoAire/:dateA/:dateD
+  annulerReserv(idrestoAire:number,dateA:string,dateD:string){
+   //new Date(datereservString);
+    console.log("Compte Service : annuler reserv "+idrestoAire + " " + dateA+ " " + dateD);
+  const httpOptions = {
+     headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Authorization': 'my-auth-token'
+  })
+};
+var idString:string=this.identifiantNum.toString();
+var idrestoAireString:string=idrestoAire.toString();
+return this.http.delete('http://localhost:3000/reservations/delete/'+this.identifiantNum+'/'+idrestoAire+'/'+dateA+'/'+dateD,httpOptions);
+}   // A LA PLACE DE LA REQ
 
   Reserver(idrestoAire:number,datearrive:Date,datedepart:Date){
    
@@ -103,14 +115,11 @@ export class compteService {
 
       let httpParams = new HttpParams()
     .append("idnum",this.identifiantNum.toString())  
-   /* .append("aire", nomAire)
-    .append("resto", nomResto)*/
     .append("idrestoAire",idrestoAire.toString())
     .append("arrive",datearrive.toString())
     .append("depart",datedepart.toString());//Obligation de convertir une reconversation aura lieu dans le serv
 
-    return this.http.post('http://localhost:3000/reservations'/*+nom+'/'+prenom+'/'+ville+'/'+
-      cp+'/'+voie+'/'+numVoie+'/'+login+'/'+mdp+'/'+SelectedAbonnement*/,httpParams/*,httpOptions*/);
+    return this.http.post('http://localhost:3000/reservations',httpParams);
   }   // A LA PLACE DE LA REQ
 
   createAccount(nom:string,prenom:string,ville:string,cp:number,voie:string,numVoie:number,
@@ -134,9 +143,8 @@ export class compteService {
     .append("mdp",mdp)
     .append("nomAbonnement",SelectedAbonnement);
 
-    return this.http.post('http://localhost:3000/compte/creation'/*+nom+'/'+prenom+'/'+ville+'/'+
-      cp+'/'+voie+'/'+numVoie+'/'+login+'/'+mdp+'/'+SelectedAbonnement*/,httpParams/*,httpOptions*/);
-  }   // A LA PLACE DE LA REQUETE HTTP CI DESSUS METTRE <form action = "url" dans le formulaire*/
+    return this.http.post('http://localhost:3000/compte/creation',httpParams);
+  }   
 
   seConnecter(login:string,mdp:string):Observable<any>{
     //recherche de l'identifiant correspondant aux parametres saisies

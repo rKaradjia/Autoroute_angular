@@ -11,8 +11,9 @@ const mysql = require('mysql');
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.header('Access-Control-Allow-Headers', 'appid, X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+//  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.header('Access-Control-Allow-Headers', 'appid, X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept,Authorization');
   next();
 });
 
@@ -98,6 +99,72 @@ app.get('/reservations/:id',(req,res)=>{ //definition de la route    localhost:3
 });
 
 });
+
+
+
+
+app.delete('/reservations/delete/:iduser/:idRestoAire/:dateA/:dateD',(req,res)=>{ //definition de la route    localhost:3000/trajets
+  console.log('Serveur ExpressJS : reservations a supprimer :' + req.params.iduser);
+  console.log("DEBUT "+req.params.dateA);
+  console.log("FIN "+req.params.dateD);
+  console.log ("IDUSER   IDRESTOAIRE  "+ req.params.iduser + "  "+ req.params.idRestoAire);
+
+  var dayA = req.params.dateA.substring(0, 10);
+  var hourA = req.params.dateA.substring(11, 19);
+
+  console.log("Date de debut DATE A reformaté " +  dayA +" "+hourA)
+
+  var dayD = req.params.dateD.substring(0, 10);
+  var hourD = req.params.dateD.substring(11, 19);
+
+  console.log("Date de fin DATE D reformaté " +  dayD +" "+hourD)
+
+  con.getConnection(function (err, connection) {
+    
+    /*DELETE FROM reservation WHERE idCompte=3 
+    AND idRestoAire=6 
+    AND DateA=DATE_ADD('2018-08-04 10:40:33',INTERVAL 2 HOUR) 
+    and DateD=DATE_ADD('2018-07-30 11:40:50',INTERVAL 2 HOUR);
+
+
+
+    DELETE FROM reservation WHERE idCompte=3 
+    AND idRestoAire=8 
+    AND dateA=DATE_ADD('2018-08-04 17:40:33',INTERVAL 2 HOUR)
+    AND dateD=DATE_ADD('2018-07-30 18:40:50',INTERVAL 2 HOUR);    
+    
+
+Unknown column 'undefined' in 'where clause'
+
+
+    parseInt(req.body.idrestoAire,10)
+    */
+
+  
+
+    connection.query("DELETE FROM reservation WHERE idCompte="+/*parseInt(*/req.body.iduser/*,10)*/+
+    " AND idRestoAire="+/*parseInt(*/req.body.idRestoAire/*,10)*/+" AND dateA=DATE_ADD('"+dayA+" "+hourA+"',INTERVAL 2 HOUR)"+
+         " AND dateD=DATE_ADD('"+dayD+" "+hourD+"',INTERVAL 2 HOUR)", (err,rows)=> {
+          if (err) throw err;
+          console.log(rows);return res.send();
+      /*if (rows.length == 0) {
+        console.log(" On cherche tous les trajets de l abonne "+err);
+        return res.send();
+      }else{
+        console.log(rows);
+        return res.send();
+        
+      }  */
+  
+
+    });
+    //met fin à la connection 
+    connection.release();
+});
+
+});
+
+
 
 
 

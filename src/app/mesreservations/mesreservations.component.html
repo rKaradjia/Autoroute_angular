@@ -14,16 +14,21 @@
       <tr>
              <td>Aire</td>
              <td>Restaurants</td>
-             <td>Heure Arrive Prévue</td>
-             <td>Heure Depart Prévue</td>
+             <td>Heure UTC Arrive Prévue </td>
+             <td>Heure UTC Depart Prévue </td>
+             <td>             </td>
+             <td>             </td>
       </tr>
 
-     <tr *ngFor="let unereservation of lesreservations">
+     <tr *ngFor="let unereservation of lesreservations;let i=index">  <!--Incrementation auto pour i-->
            <td>{{unereservation.nomAire}}</td>
-           <td>{{unereservation.libelle}}</td>
+           <td>{{unereservation.libelle}}</td><!--libelle du restaurant-->
            <td>{{unereservation.dateA}}</td>
            <td>{{unereservation.dateD}}</td>
-
+           <td><input type="button" (click)="modifyReserv()" value="Modifier"></td>
+           <!--Rappel id Compte enregistré-->
+           <input type="button" (click)="deleteReserv(i)" value="Supprimer">
+           
      </tr>
 </table>
 </div>

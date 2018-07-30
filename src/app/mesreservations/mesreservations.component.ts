@@ -28,6 +28,7 @@ export class MesreservationsComponent implements OnInit {
   SelectedArrive:Date;
   constructor(private httpserver: compteService) { 
   this.httpserver=httpserver;
+  this.getAllAire();
   }
   ngOnInit() {
   }
@@ -45,6 +46,7 @@ export class MesreservationsComponent implements OnInit {
       }else{
         this.lookReserv=true;
         this.lesreservations=data;
+        console.log(" Type de la date "+typeof this.lesreservations[0].dateA);
       }
 
   
@@ -106,30 +108,82 @@ export class MesreservationsComponent implements OnInit {
       this.httpserver.findIdRestoAire(this.SelectedAire,this.SelectedResto).subscribe(data=>{
 
 
-      console.log("Composant reservations ID RESTO AIRE "+ data);
+       console.log("Composant reservations ID RESTO AIRE "+ data);
              //On souscrit auprès d'une fonction du Service HTTP
-      this.httpserver.Reserver(parseInt(data.toString(),10),this.SelectedArrive,this.SelectedDepart).subscribe(data=>{
-        console.log ("Connect Component Identifiant recuperer " +data);
+        this.httpserver.Reserver(parseInt(data.toString(),10),this.SelectedArrive,this.SelectedDepart).subscribe(data=>{
+          console.log ("Connect Component Identifiant recuperer " +data);
         //this.identifiant=parseInt(data,10);
-        console.log("Connect Component Identifiant Memorise" +data);
-     /* if(data==0){
+          console.log("Connect Component Identifiant Memorise" +data);
+         /* if(data==0){
              this.messagereserv=true;
-      }else{
+          }else{
         this.messageerreurreserv=true
   
       }*/
-      })
-
-
+        })
 
       })
+  }
+
+//DEFINIR LES CONDITIONS 
+ //Possibilite de modifier decaler d'une heure par exemple
+  modifyReserv(){}
 
 
-    
 
-      
+  //supprression pure et simple
+  deleteReserv(index:number){
+
+    this.httpserver.getAllReservations().subscribe(data=>{ // on recupere le tableau
+      console.log("Les trajets de l abonne : ");           //correspondant au reserv(s) 
+      console.log(data);                                   //du client 
+      if(data==0){
+               //Message erreur
+      }else{
+        this.lookReserv=true;
+        this.lesreservations=data;   //Reservation du client
+        console.log(" Content "+this.lesreservations[index].dateA);
+        console.log(" datecut "+this.lesreservations[index].dateA.substring(0,10));
+
+        //Date de la reservation
+        let datereservString = this.lesreservations[index].dateA
+        let datereserv = new Date(datereservString);
+       
+        //Date du jour
+        var dateFormat = require('dateformat');
+        var datenow = new Date();
+        console.log("date now"+datenow + "  date reserv "+datereserv ) //Fri Jul 27 2018 11:36:56 GMT+0200 (CEST)
+        //dateFormat(now, "yyyy-mm-dd");
+        //console.log("Date du jour"+"SELECTION");
+
+        if(datereserv>=datenow){
+
+          var aire:string=this.lesreservations[index].nomAire;
+          var resto:string=this.lesreservations[index].libelle;
+          this.httpserver.findIdRestoAire(aire,resto).subscribe(data=>{
+            var idrestoAire=parseInt(data.toString(),10)
+            this.httpserver.annulerReserv(idrestoAire,this.lesreservations[index].dateA,this.lesreservations[index].dateD).subscribe(data=>{ // on recupere le tableau
+              console.log("Les reserv de l abonne : ");           //correspondant au reserv(s) 
+              console.log(data);                    
+
+            })
+
+          })  
+
+        }else{
+                console.log("Impossible de supprimer une reserv passé ou du jour");
+
+
+
+        }
+ 
+      }
+
   
-    }
+    })
+
+
+  }
   
 
   
