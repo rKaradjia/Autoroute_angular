@@ -114,12 +114,7 @@ export class MesreservationsComponent implements OnInit {
           console.log ("Connect Component Identifiant recuperer " +data);
         //this.identifiant=parseInt(data,10);
           console.log("Connect Component Identifiant Memorise" +data);
-         /* if(data==0){
-             this.messagereserv=true;
-          }else{
-        this.messageerreurreserv=true
-  
-      }*/
+         
         })
 
       })
@@ -164,7 +159,9 @@ export class MesreservationsComponent implements OnInit {
             var idrestoAire=parseInt(data.toString(),10)
             this.httpserver.annulerReserv(idrestoAire,this.lesreservations[index].dateA,this.lesreservations[index].dateD).subscribe(data=>{ // on recupere le tableau
               console.log("Les reserv de l abonne : ");           //correspondant au reserv(s) 
-              console.log(data);                    
+              console.log(data);   
+              this.lesreservations=[]        //re initialisation du tableau
+              this.voirReservations();//affichage des reserv restantes                  
 
             })
 

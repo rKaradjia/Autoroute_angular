@@ -118,40 +118,24 @@ app.delete('/reservations/delete/:iduser/:idRestoAire/:dateA/:dateD',(req,res)=>
   var hourD = req.params.dateD.substring(11, 19);
 
   console.log("Date de fin DATE D reformaté " +  dayD +" "+hourD)
-  console.log('TypeOF');
-  console.log('iduser ' + typeof parseInt(req.params.iduser)  + "contenu " +  parseInt(req.params.iduser));
-  console.log('idRestoAire ' + typeof parseInt(req.params.idRestoAire)+ "contenu " +  parseInt(req.params.idRestoAire));
+  
   con.getConnection(function (err, connection) {
-    
-    /*DELETE FROM reservation WHERE idCompte=3 
-    AND idRestoAire=6 
-    AND DateA=DATE_ADD('2018-08-04 10:40:33',INTERVAL 2 HOUR) 
-    and DateD=DATE_ADD('2018-07-30 11:40:50',INTERVAL 2 HOUR);
-
-
-    
-
-      
-Unknown column 'undefined' in 'where clause'
-
-    parseInt(req.body.idrestoAire,10)
-    */
 
   
 
     connection.query("DELETE FROM reservation WHERE idCompte="+parseInt(req.params.iduser)+
     " AND reservation.idRestoAire="+parseInt(req.params.idRestoAire)+" AND dateA=DATE_ADD('"+dayA+" "+hourA+"',INTERVAL 2 HOUR)"+
          " AND dateD=DATE_ADD('"+dayD+" "+hourD+"',INTERVAL 2 HOUR)", (err,rows)=> {
-          if (err) throw err;
-          console.log(rows);return res.send();
-      /*if (rows.length == 0) {
+       /* if (err) throw err;
+          console.log(rows);return res.send();*/
+      if (rows.length == 0) {
         console.log(" On cherche tous les trajets de l abonne "+err);
         return res.send();
       }else{
         console.log(rows);
         return res.send();
         
-      }  */
+      }  
   
 
     });
