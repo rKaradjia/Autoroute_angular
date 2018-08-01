@@ -27,6 +27,7 @@ export class AppComponent {
   corecord:boolean = false; /*Affichage du composant de connection/enregistrement*/
   mestrajets:boolean = false;
   mesreservations:boolean = false;
+  moncompte:boolean = false;
 
   constructor(private httpserv:compteService) {
     this.httpserv=httpserv;
@@ -75,23 +76,38 @@ export class AppComponent {
       this.mesreservations=false;//arret de l'affiche du composant
       this.isAuth=false;//fin de la session
       this.corecord=true;//afficher composant connexion/enregist*
+      this.moncompte=false;
     }
     
 
     /*Afficher le composant pour la liste des trajets*/
     voirTrajets(){
       this.mesreservations=false;//arret affichage du composant
-
+      this.moncompte=false;
       this.mestrajets=true;//affichage du composant 
     }
 
 
     voirReservations(){
       this.mestrajets=false;
-
+      this.moncompte=false;
       this.mesreservations=true;
 
     }
+
+    voirCompte(){
+      this.mestrajets=false;
+      this.mesreservations=false;
+      this.moncompte=true;
+
+    }
+
+
+
+
+
+
+
 
 
 

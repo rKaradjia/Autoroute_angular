@@ -332,6 +332,88 @@ app.post('/reservations', function (req, res) {  //parametres à definir ulterie
   });
 
 
+
+  app.get('/compte/:id',(req,res)=>{ //definition de la route    localhost:3000/trajets
+    console.log('Serveur ExpressJS : Les reservations de l abonne :' + req.params.id);
+  
+    con.getConnection(function (err, connection) {
+      
+      connection.query("SELECT nom,prenom,ville,cp,voie,voieNum,nomabonnement FROM compte where "+
+      "login='"+ req.params.id+"'", (err,rows)=> {
+        if (rows.length == 0) {
+          return res.json(0);
+        }else{
+          console.log(rows[0]);return res.json(rows[0]);
+        }
+    
+  
+      });
+      //met fin à la connection 
+      connection.release();
+  });
+  
+  });
+
+  app.get('/compte/pwd/:iduser/:oldmdp',(req,res)=>{ //definition de la route    localhost:3000/trajets
+    console.log('Serveur ExpressJS : Verifier old_mdp :' + req.params.iduser);
+    
+  
+    con.getConnection(function (err, connection) {
+      
+      connection.query("SELECT mdp FROM compte where "+
+      "login='"+ req.params.iduser+"'", (err,rows)=> {
+
+        console.log('row[0] content ' + rows[0].mdp + ' type  '+typeof rows[0].mdp)
+        console.log('req params mdp  content ' + req.params.oldmdp  + ' type  '+ typeof req.params.mdp)
+
+        if (rows.length == 0) {
+          console.log('no result ' + res.json(rows[0].mdp) )
+          return res.json(rows[0].mdp);
+        }else{
+
+              if(req.params.oldmdp==rows[0].mdp){
+
+                return res.json(true);
+              }else{
+
+                return res.json(false);
+              }
+
+         // console.log(rows[0].mdp);return res.json(true);
+        }
+    
+  
+      });
+      //met fin à la connection 
+      connection.release();
+  });
+  
+  });
+
+  app.put('/compte/updatepwd/:iduser/:newpwd', function (req, res) {  //parametres à definir ulterieurement ceci est un test
+    console.log('Serveur ExpressJS : maj Mdp :' + req.params.iduser);
+
+    console.log('Status' + res.statusCode);
+    con.getConnection(function (err, connection) {
+      console.log ("Erreur oooo" + err);
+      
+    connection.query("UPDATE compte SET mdp='"+req.params.newpwd+"' "+
+    " WHERE login ='"+req.params.iduser+"'", (err,rows)=> {
+      if (rows.length == 0) {
+        return res.json(0);
+      }else{
+        return res.send()
+      }
+
+     
+      });
+      //met fin à la connection 
+      connection.release();
+  });
+ 
+});
+
+
 /*RECHERCHE DE L EXISTANCE D UN COMPTE*/
   app.get('/connect/:login/:mdp', function (req, res) {  //parametres à definir ulterieurement ceci est un test
     console.log('Serveur ExpressJS : Ouverture du compte de :' + req.params.id);

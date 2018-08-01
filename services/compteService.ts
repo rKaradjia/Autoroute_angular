@@ -122,6 +122,12 @@ return this.http.delete('http://localhost:3000/reservations/delete/'+this.identi
     return this.http.post('http://localhost:3000/reservations',httpParams);
   }   // A LA PLACE DE LA REQ
 
+  infoCompte(){
+
+    return this.http.get('http://localhost:3000/compte/'+this.identifiant);
+  }
+
+
   createAccount(nom:string,prenom:string,ville:string,cp:number,voie:string,numVoie:number,
     login:string,mdp:string,SelectedAbonnement:string){
    
@@ -145,6 +151,20 @@ return this.http.delete('http://localhost:3000/reservations/delete/'+this.identi
 
     return this.http.post('http://localhost:3000/compte/creation',httpParams);
   }   
+
+  getPassword(oldmdp:string){
+      return this.http.get('http://localhost:3000/compte/pwd/'+this.identifiant+'/'+oldmdp);
+
+  }
+  
+
+  updatePassword(newmdp:string){
+
+    let headers = new Headers();
+  headers.append('Content-Type', 'application/json');  
+
+    return this.http.put('http://localhost:3000/compte/updatepwd/'+this.identifiant+'/'+newmdp,headers);
+  }
 
   seConnecter(login:string,mdp:string):Observable<any>{
     //recherche de l'identifiant correspondant aux parametres saisies

@@ -26,7 +26,7 @@
     <button mat-button>Accueil</button>
     <button mat-button (click)="voirTrajets()">Mes trajets</button>
     <button mat-button (click)="voirReservations()">Mes reservations</button>
-    <button mat-button>A determiner</button>
+    <button mat-button (click)="voirCompte()">Mon compte</button>
     <button mat-button>A determiner</button>
     <button mat-button (click)="logOut()">Logout</button>
   </mat-toolbar>
@@ -46,6 +46,9 @@
 
 <!--voir les reservations de l abonne-->
 <app-mesreservations *ngIf="mesreservations"></app-mesreservations>
+
+<!--voir mon compte-->
+<app-moncompte *ngIf="moncompte"></app-moncompte>
 
 
 

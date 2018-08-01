@@ -1,3 +1,22 @@
-<p>
-  moncompte informe sur l'etat du compte
-</p>
+
+<h3>Mon compte</h3>
+ 
+<p>Nom  :  {{info.nom}} </p>
+<p>Prenom  :  {{info.prenom}} </p>
+<p>Ville  :  {{info.ville}} </p>
+<p>voie  :  {{info.voie}} </p>
+<p>num  :  {{info.voieNum}} </p>
+<p>Abonnement souscrit  :  {{info.nomabonnement}} </p>
+
+<form (ngSubmit)="modifyPassword()">
+  <h4>Modifier le mot de passe</h4>
+  <p>Ancien mot de passe</p>
+  <input type="password" name="oldmdp" [(ngModel)]="oldmdp">
+  <p>Nouveau mot de passe</p>
+  <input type="password" name="newmdp" [(ngModel)]="newmdp">
+   <br>
+  <input type="submit" value="Validez" /> 
+  <p *ngIf="messagenewMDP">Votre mot de passe a été modifié</p>
+  <p *ngIf="erreurnewmdp">Votre mot de passe n'a pu être modifié, verifiez votre saisie </p>
+  
+</form>
