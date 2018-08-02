@@ -15,7 +15,7 @@ export class MoncompteComponent implements OnInit {
   messageabonnement:boolean=false;
   lesabonnements=[]
   SelectedAbonnement:string;
-  dateDerniereModif:string
+ 
   
 
   constructor(private httpserver: compteService) {
@@ -92,7 +92,7 @@ modifyAbonnement(){
                 console.log(data);
                 //console.log(data.cp)
                 this.info=data;
-                this.dateDerniereModif=data1.toString();
+               
                 this.messageabonnement=true
                 
               })

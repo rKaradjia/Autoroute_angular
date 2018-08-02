@@ -338,7 +338,7 @@ app.post('/reservations', function (req, res) {  //parametres à definir ulterie
   
     con.getConnection(function (err, connection) {
       
-      connection.query("SELECT nom,prenom,ville,cp,voie,voieNum,nomabonnement FROM compte where "+
+      connection.query("SELECT nom,prenom,ville,cp,voie,voieNum,nomabonnement,modifabonnement FROM compte where "+
       "login='"+ req.params.id+"'", (err,rows)=> {
         if (rows.length == 0) {
           return res.json(0);
