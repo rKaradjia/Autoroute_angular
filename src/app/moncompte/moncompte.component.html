@@ -20,3 +20,19 @@
   <p *ngIf="erreurnewmdp">Votre mot de passe n'a pu être modifié, verifiez votre saisie </p>
   
 </form>
+
+<form (ngSubmit)="modifyAbonnement()"><!--ajouter condition a l avenir : a voir-->
+  <h4>Changer d abonnement</h4>
+<select #selectedAbonnement (change)='SelectedAbonnement = selectedAbonnement.value'>
+  <option *ngFor="let unabonnement of lesabonnements" [value]="unabonnement.nom">
+    {{unabonnement.nom}}
+  </option>
+</select>
+<input type="submit" value="Validez"/>
+<p *ngIf="messageabonnement">Si vous constatez que votre modification n'a pas été prise en compte (voir info du compte
+                     ci dessus: <br>
+                     1- La modification n'est pas possible que tous les 30 Jours <br>
+                     2- La base de donnée est inacessible, contactez l'administrateur 
+                     Derniere Modif {{dateDerniereModif}}<br>
+</p>
+</form>

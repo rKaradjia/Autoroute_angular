@@ -392,7 +392,7 @@ app.post('/reservations', function (req, res) {  //parametres à definir ulterie
 
   app.put('/compte/updatepwd/:iduser/:newpwd', function (req, res) {  //parametres à definir ulterieurement ceci est un test
     console.log('Serveur ExpressJS : maj Mdp :' + req.params.iduser);
-
+     
     console.log('Status' + res.statusCode);
     con.getConnection(function (err, connection) {
       console.log ("Erreur oooo" + err);
@@ -412,6 +412,59 @@ app.post('/reservations', function (req, res) {  //parametres à definir ulterie
   });
  
 });
+
+
+
+app.put('/compte/abonnement/:iduser/:nomabonnement', function (req, res) {  //parametres à definir ulterieurement ceci est un test
+  console.log('Serveur ExpressJS : maj abonnement :' + req.params.nomabonnement);
+
+
+    var date = new Date();
+    var yyyy = date.getFullYear().toString();
+    var mm = (date.getMonth()+1).toString();
+    var dd  = date.getDate().toString();
+    var mmChars = mm.split(''); // SPLIT
+    var ddChars = dd.split('');
+  
+    var dateNow=yyyy + '-' + (mmChars[1]?mm:"0"+mmChars[0]) + '-' + (ddChars[1]?dd:"0"+ddChars[0])
+
+
+  console.log('Status' + res.statusCode);
+  con.getConnection(function (err, connection) {
+   // console.log ("Erreur oooo" + err);
+    
+  connection.query("UPDATE compte SET nomabonnement='"+req.params.nomabonnement+"',modifabonnement='"+dateNow+"'"+
+  " WHERE login ='"+req.params.iduser+"' AND DATEDIFF('"+dateNow+"',modifabonnement)>30", (err,rows)=> {
+    if (rows.length==0) {
+      //console.log(err)
+      return res.json(0);
+    }else{
+
+
+     // console.log(rows[0].modifabonnement)
+      //console.log('ok')
+     // return res.json(1);
+      /*con.getConnection(function (err, connection1) {
+
+        connection1.query("select modifabonnement from compte where login ='"+req.params.iduser+"'",(err1,rows1)=> {
+          console.log ('Date   ----->'+rows1[0].modifabonnement)
+          return rows1[0].modifabonnement;
+        }
+      )
+        connection1.release()
+      })*/
+    }
+
+          
+    });
+    //met fin à la connection 
+    connection.release();
+});
+
+});
+
+
+
 
 
 /*RECHERCHE DE L EXISTANCE D UN COMPTE*/

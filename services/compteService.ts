@@ -127,6 +127,14 @@ return this.http.delete('http://localhost:3000/reservations/delete/'+this.identi
     return this.http.get('http://localhost:3000/compte/'+this.identifiant);
   }
 
+  updateAbonnement(newAbonnement:string){
+
+    let headers = new Headers();
+  headers.append('Content-Type', 'application/json');  
+
+    return this.http.put('http://localhost:3000/compte/abonnement/'+this.identifiant+'/'+newAbonnement,headers);
+  }
+
 
   createAccount(nom:string,prenom:string,ville:string,cp:number,voie:string,numVoie:number,
     login:string,mdp:string,SelectedAbonnement:string){

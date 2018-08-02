@@ -12,10 +12,16 @@ export class MoncompteComponent implements OnInit {
   newmdp:string;
   messagenewMDP:boolean=false;
   erreurnewmdp:boolean=false;
+  messageabonnement:boolean=false;
+  lesabonnements=[]
+  SelectedAbonnement:string;
+  dateDerniereModif:string
+  
 
   constructor(private httpserver: compteService) {
     this.httpserver=httpserver;
           this.infoCompte()
+          this.getAllabonnement()
 
   }
 
@@ -37,6 +43,7 @@ export class MoncompteComponent implements OnInit {
 
 
   modifyPassword(){
+    this.messageabonnement=false;
       this.httpserver.getPassword(this.oldmdp).subscribe(data=>{
         console.log("Les infos : ");
         console.log(data.toString());
@@ -59,8 +66,39 @@ export class MoncompteComponent implements OnInit {
         }
         
       })
-  
-    
+
+
+  }
+
+getAllabonnement(){
+
+this.httpserver.getNomOfAbonnements().subscribe(data=>{
+  this.lesabonnements=data
+  this.SelectedAbonnement=this.lesabonnements[0].nom
+})
+
+}
+
+
+
+modifyAbonnement(){
+
+    //this.SelectedAbonnement
+    this.httpserver.updateAbonnement(this.SelectedAbonnement).subscribe(data1=>{
+      
+               console.log(data1);
+               this.httpserver.infoCompte().subscribe(data=>{
+                console.log("Les infos : ");
+                console.log(data);
+                //console.log(data.cp)
+                this.info=data;
+                this.dateDerniereModif=data1.toString();
+                this.messageabonnement=true
+                
+              })
+
+    })
+
 
 
   }
