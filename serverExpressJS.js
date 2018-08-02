@@ -27,7 +27,7 @@ app.use(bodyparser.urlencoded({
     host: "localhost",
     user: "root",
     password: "azerty",
-    database : "autorouteangularv3"
+    database : "autorouteangularv4"
   });
 
 
@@ -469,7 +469,7 @@ app.put('/compte/abonnement/:iduser/:nomabonnement', function (req, res) {  //pa
 
 /*RECHERCHE DE L EXISTANCE D UN COMPTE*/
   app.get('/connect/:login/:mdp', function (req, res) {  //parametres à definir ulterieurement ceci est un test
-    console.log('Serveur ExpressJS : Ouverture du compte de :' + req.params.id);
+    console.log('Serveur ExpressJS : Ouverture du compte de :' + req.params.login);
 
     console.log('Status' + res.statusCode);
     con.getConnection(function (err, connection) {
